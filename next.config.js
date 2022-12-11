@@ -1,7 +1,13 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
+const withSvgr = require("next-plugin-svgr");
 
-module.exports = nextConfig
+/** @type {import('next').NextConfig} */
+const nextConfig = withSvgr({
+  reactStrictMode: true,
+  // swcMinify: true,
+  compiler: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
+});
+
+module.exports = nextConfig;
