@@ -1,15 +1,29 @@
+import { logout } from "lib";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 import { InstagramIcon, TwitterIcon } from "ui/icons";
 import { TinyText, LargeTextThin } from "ui/texts";
 export const Footer = () => {
+  const router = useRouter();
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
   return (
     <FooterContainer>
       <FooterContentContainer>
         <ContentBox>
-          <TinyText>Ingresar</TinyText>
-          <TinyText>Mi perfil</TinyText>
-          <TinyText>Buscar</TinyText>
-          <TinyText>Logout</TinyText>
+          <Link href={"/ingresar"} passHref legacyBehavior>
+            <TinyText>Ingresar</TinyText>
+          </Link>
+          <Link href={"/perfil"} passHref legacyBehavior>
+            <TinyText>Mi perfil</TinyText>
+          </Link>
+          <Link href={"/"} passHref legacyBehavior>
+            <TinyText>Buscar</TinyText>
+          </Link>
+          <TinyText onClick={handleLogout}>Logout</TinyText>
         </ContentBox>
         <ContentBox>
           <LargeTextThin>Redes</LargeTextThin>

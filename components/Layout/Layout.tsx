@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Footer } from "./Footer";
-import { NavBar } from "./NavBar";
+import { NavBar } from "./Header.tsx/NavBar";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

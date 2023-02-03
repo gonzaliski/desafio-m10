@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const DarkHeading = styled.h1`
+export const DarkHeading = styled.h1<HeadingProps>`
   color: var(--black-main);
+  text-align: ${(props) => props.position};
   font-size: 48px;
   margin: 0;
 `;
@@ -39,4 +40,9 @@ export const BodyTextBold = styled(BodyText)`
 
 export const TinyText = styled(BodyText)`
   font-weight: 300;
+`;
+
+export const Label = styled.label`
+  font-size: 15px;
+  align-self: flex-start;
 `;

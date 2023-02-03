@@ -1,25 +1,40 @@
-"use client";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
-import { LightSubtitle, LargeTextBold } from "ui/texts";
+import { HorizontalBox } from "ui/boxes";
+import { LargeTextBold, LightSubtitle } from "ui/texts";
+import { SearchBar } from "./SearchBar";
 export const NavBar = () => {
+  const router = useRouter();
   const [showContent, setShowContent] = useState(false);
   const handleClick = (state: boolean) => {
     setShowContent(state);
   };
   return (
     <NavBarBox>
-      <LightSubtitle>Ecommerce</LightSubtitle>
-      <BurgerMenu onOpen={handleClick} />
+      <HorizontalBox>
+        <LightSubtitle onClick={() => router.push("/")}>
+          Ecommerce
+        </LightSubtitle>
+        <BurgerMenu onOpen={handleClick} />
+      </HorizontalBox>
+      {router.pathname !== "/" && <SearchBar />}
       <NavBarLinks active={showContent}>
         <li>
-          <LargeTextBold>Ingresar</LargeTextBold>
+          <Link href={"/ingresar"} passHref legacyBehavior>
+            <LargeTextBold>Ingresar</LargeTextBold>
+          </Link>
         </li>
         <li>
-          <LargeTextBold>Mi perfil</LargeTextBold>
+          <Link href={"/perfil"} passHref legacyBehavior>
+            <LargeTextBold>Mi perfil</LargeTextBold>
+          </Link>
         </li>
         <li>
-          <LargeTextBold>Buscar</LargeTextBold>
+          <Link href={"/"} passHref legacyBehavior>
+            <LargeTextBold>Buscar</LargeTextBold>
+          </Link>
         </li>
       </NavBarLinks>
     </NavBarBox>
@@ -33,6 +48,7 @@ const NavBarBox = styled.nav`
   padding: 15px;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 `;
 
 const NavBarLinks = styled.ul`
@@ -46,7 +62,7 @@ const NavBarLinks = styled.ul`
   right: ${({ active }) => (active ? "0%" : "-100%")};
   background-color: var(--primary-color);
   top: 0;
-  width: 30%;
+  width: 50%;
   z-index: 1;
   transition: all 0.4s linear;
   box-shadow: 1px 10px 60px 3px rgba(0, 0, 0, 0.59);
@@ -55,6 +71,10 @@ const NavBarLinks = styled.ul`
   li {
     padding: 20px 10px;
     font-size: 18px;
+    cursor: pointer;
+  }
+  li:hover {
+    color: var(--secondary-color);
   }
 `;
 

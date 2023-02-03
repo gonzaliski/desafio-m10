@@ -1,33 +1,53 @@
-import styled from "styled-components";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import styled from "styled-components";
+import { MainButton, TertiaryButton } from "ui/buttons";
 import { BodyText, LargeTextThin, Subtitle } from "ui/texts";
-import { TertiaryButton } from "ui/buttons";
 import Watch from "/public/watch.jpg";
-export const ProductCard = () => {
+export const ProductCard = ({
+  id,
+  title,
+  desc,
+  price,
+  purchasable,
+}: ProductCardProps) => {
+  const router = useRouter();
   return (
-    <CardContainer>
-      <Image src={Watch} alt={"reloj"} height={100}></Image>
-      <div className="product__info-container">
-        <Subtitle>
-          Waterproof Sport Smart Watch Monitor for IOS and Android
-        </Subtitle>
-        <BodyText>This smart watch has the best technology</BodyText>
-      </div>
-      <LargeTextThin>$100</LargeTextThin>
-      <TertiaryButton>Ver detalle</TertiaryButton>
+    <CardContainer purchasable={purchasable}>
+      <Image src={Watch} alt={"reloj"} height={purchasable ? 200 : 100}></Image>
+      <Subtitle>{title}</Subtitle>
+      <LargeTextThin>${price}</LargeTextThin>
+      {!purchasable && (
+        <TertiaryButton onClick={() => router.push("/item/" + id)}>
+          Ver detalle
+        </TertiaryButton>
+      )}
+      {purchasable && <MainButton>Comprar</MainButton>}
+      {purchasable && <BodyText>{desc}</BodyText>}
     </CardContainer>
   );
 };
 
-const CardContainer = styled.div`
+interface CardContainerProps {
+  purchasable?: boolean;
+}
+
+const InfoTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CardContainer = styled.div<CardContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: left;
   gap: 15px;
   padding: 0px 15px 15px 15px;
-  max-height: 380px;
-  max-width: 280px;
+  max-height: ${({ purchasable }) => (purchasable ? "90%" : "380px")};
+  max-width: ${({ purchasable }) => (purchasable ? "70%" : "280px")};
+  height: 100%;
   border-radius: 10px;
   background-color: white;
 `;

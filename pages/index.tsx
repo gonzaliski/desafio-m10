@@ -1,40 +1,45 @@
-import { Layout } from "components/Layout";
+import { Layout } from "components/Layout/Layout";
 import { ProductCard } from "components/ProductCard";
+import { products } from "lib/products";
+import { useRouter } from "next/router";
 import styled from "styled-components";
-import { PageSection } from "ui/boxes";
-import {
-  BorderButton,
-  MainButton,
-  SecondaryButton,
-  TertiaryButton,
-} from "ui/buttons";
+import { PageSection, VerticalBox } from "ui/boxes";
+import { MainButton } from "ui/buttons";
 import { Input } from "ui/inputs";
-import {
-  BodyText,
-  BodyTextBold,
-  DarkHeading,
-  LargeTextBold,
-  LargeTextThin,
-  LightHeading,
-  LightSubtitle,
-} from "ui/texts";
+import { DarkHeading, LightSubtitle } from "ui/texts";
 
 export default function Home() {
+  const router = useRouter();
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const query = e.target.query.value;
+    router.push({ pathname: "/search", query: { q: query } });
+  };
   return (
     <Layout>
       <PageSection>
-        <DarkHeading>El mejor Ecommerce</DarkHeading>
-        <QueryForm>
-          <Input placeholder="encontrá tu producto ideal"></Input>
-          <MainButton>Buscar</MainButton>
-        </QueryForm>
+        <VerticalBox>
+          <DarkHeading position={"center"}>El mejor Ecommerce</DarkHeading>
+          <QueryForm onSubmit={handleSubmit}>
+            <Input
+              placeholder="encontrá tu producto ideal"
+              name="query"
+            ></Input>
+            <MainButton>Buscar</MainButton>
+          </QueryForm>
+        </VerticalBox>
       </PageSection>
       <FeaturedSection>
         <LightSubtitle>Productos Destacados</LightSubtitle>
         <div className="featured__list-container">
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
-          <ProductCard></ProductCard>
+          {products.map((p) => (
+            <ProductCard
+              id={p.id}
+              title={p.title}
+              desc={p.desc}
+              price={p.price}
+            />
+          ))}
         </div>
       </FeaturedSection>
     </Layout>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainButton = styled.button`
-  max-width: 250px;
+  max-width: 350px;
   min-width: 90px;
   width: 100%;
   max-height: 45px;
@@ -23,7 +23,7 @@ export const MainButton = styled.button`
 `;
 
 export const SecondaryButton = styled(MainButton)`
-  background-color: var(--tertiary-comp-color);
+  background-color: var(--primary-comp-color);
 `;
 
 export const TertiaryButton = styled(MainButton)`
