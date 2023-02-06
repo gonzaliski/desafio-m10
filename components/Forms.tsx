@@ -54,7 +54,9 @@ const EmailForm = (props: any) => {
           <Subtitle>Ingresar</Subtitle>
           <Label>Email</Label>
           <Input type="email" id="email" {...register("email")} />
-          {errors.email && <TinyText>{errors.email.message}</TinyText>}
+          {errors.email && (
+            <TinyText>{errors.email.message as string}</TinyText>
+          )}
           <TertiaryButton>Continuar</TertiaryButton>
         </VerticalBox>
       </StyledForm>
@@ -89,7 +91,7 @@ const CodeForm = () => {
         <VerticalBox gap={"15px"}>
           <Subtitle>Codigo</Subtitle>
           <Input type="text" id="code" {...register("code")} />
-          {errors.code && <TinyText>{errors.code.message}</TinyText>}
+          {errors.code && <TinyText>{errors.code.message as string}</TinyText>}
           <TertiaryButton>Enviar</TertiaryButton>
           <BodyText>Te enviaremos un codigo a tu mail</BodyText>
         </VerticalBox>
@@ -146,7 +148,7 @@ export const ProfileForm = () => {
             defaultValue={userData?.username || ""}
             {...register("name")}
           />
-          {errors.name && <TinyText>{errors.name.message}</TinyText>}
+          {errors.name && <TinyText>{errors.name.message as string}</TinyText>}
           <Label>Direccion</Label>
           <Input
             type="text"
@@ -154,7 +156,9 @@ export const ProfileForm = () => {
             defaultValue={userData?.address || ""}
             {...register("address")}
           />
-          {errors.address && <TinyText>{errors.address.message}</TinyText>}
+          {errors.address && (
+            <TinyText>{errors.address.message as string}</TinyText>
+          )}
           <Label>Telefono</Label>
           <Input
             type="tel"
@@ -163,7 +167,9 @@ export const ProfileForm = () => {
             defaultValue={userData?.telephone || ""}
             {...register("telephone")}
           />
-          {errors.telephone && <TinyText>{errors.telephone.message}</TinyText>}
+          {errors.telephone && (
+            <TinyText>{errors.telephone.message as string}</TinyText>
+          )}
           <TertiaryButton>Continuar</TertiaryButton>
         </VerticalBox>
       </StyledForm>

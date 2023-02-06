@@ -1,24 +1,23 @@
 import { Layout } from "components/Layout/Layout";
-import { ProductCard } from "components/ProductCard";
-import { useProduct } from "lib/hooks";
+import { ProductCardDetail } from "components/products/ProductCardDetail";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { PageSection } from "ui/boxes";
 
 export default function Item() {
   const router = useRouter();
-  const { itemId } = router.query;
-  const product = useProduct(itemId);
+
+  const [productId, setProductId] = useState("");
+  useEffect(() => {
+    if (router.query.itemId) {
+      setProductId(router.query.itemId as string);
+    }
+  }, [router.query]);
 
   return (
     <Layout>
-      <PageSection>
-        <ProductCard
-          id={product.id}
-          title={product.title}
-          desc={product.desc}
-          price={product.price}
-          purchasable={true}
-        ></ProductCard>
+      <PageSection alignCenter>
+        <ProductCardDetail id={productId} />
       </PageSection>
     </Layout>
   );

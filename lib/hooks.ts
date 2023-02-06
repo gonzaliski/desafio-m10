@@ -1,6 +1,6 @@
 import useSWR from "swr";
+import useSWRImmutable from "swr";
 import { fetchAPI } from "./api";
-import { products } from "./products";
 
 export function useMe() {
   const { data, error } = useSWR("/me", fetchAPI);
@@ -8,7 +8,20 @@ export function useMe() {
   return res;
 }
 
-export function useProduct(productId: number) {
-  const data = products.find((p) => p.id == productId);
-  return data || products[0];
+export function useProducts(query: string | undefined, offset?: string) {
+  const { data, error } = useSWRImmutable(
+    `/search?search=${query}&limit=20&offset=${offset || 20}`,
+    fetchAPI
+  );
+  const res = data ? data : null;
+  return res;
+}
+
+export function useProduct(productId: string) {
+  const { data, error } = useSWRImmutable(
+    "/products?productId=" + productId,
+    fetchAPI
+  );
+  const res = data ? data : null;
+  return res;
 }

@@ -11,7 +11,15 @@ type ProductCardProps = {
   title: string;
   desc: string;
   price: number;
+  imgUrl?: string;
   purchasable?: boolean;
+};
+type NavBarLinksProps = {
+  active?: active;
+};
+
+type BurgerMenuContainerProps = {
+  open?: boolean;
 };
 
 type VerticalBoxProps = {
@@ -33,4 +41,16 @@ type HeadingProps = {
 type userData = {
   username?: string;
   telephone?: number;
+};
+
+type ProductsSectionProps = {
+  color?: string;
+};
+
+type MainButtonProps = {
+  size?: string;
+};
+
+type ProductCardDetailProps = {
+  id: string;
 };

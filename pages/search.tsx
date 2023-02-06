@@ -1,44 +1,24 @@
 import { Layout } from "components/Layout/Layout";
-import { ProductCard } from "components/ProductCard";
-import styled from "styled-components";
+import { SearchProducts } from "components/SearchProducts";
+import { ProductsSection } from "ui/boxes";
 import { Subtitle } from "ui/texts";
-import { products } from "lib/products";
 export default function Search() {
   return (
     <Layout>
-      <FeaturedSection>
+      <ProductsSection>
         <Subtitle>Resultados</Subtitle>
         <div className="featured__list-container">
-          {products.map((p) => (
+          <SearchProducts />
+          {/* {products.map((p: any) => (
             <ProductCard
-              id={p.id}
-              title={p.title}
-              desc={p.desc}
-              price={p.price}
+              id={p.objectID}
+              title={p.Name}
+              desc={p.Description}
+              price={p.Unit_cost}
             />
-          ))}
+          ))} */}
         </div>
-      </FeaturedSection>
+      </ProductsSection>
     </Layout>
   );
 }
-
-const FeaturedSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--tertirary-color);
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  height: auto;
-  width: 100vw;
-  gap: 20px;
-  padding: 40px 0;
-
-  .featured__list-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
-  }
-`;

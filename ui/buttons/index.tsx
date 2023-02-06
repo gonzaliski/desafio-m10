@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const MainButton = styled.button`
+export const MainButton = styled.button<MainButtonProps>`
   max-width: 350px;
   min-width: 90px;
-  width: 100%;
+  width: ${(props) => props.size || "100%"};
   max-height: 45px;
   border-radius: 10px;
   border-style: none;

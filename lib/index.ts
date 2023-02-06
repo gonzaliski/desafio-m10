@@ -3,9 +3,11 @@ export function saveToken(token: string) {
 }
 
 export function retrieveToken() {
-  const token = localStorage.getItem("token") || "";
-  if (!token) return;
-  return JSON.parse(token);
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token") || "";
+    if (!token) return;
+    return JSON.parse(token);
+  }
 }
 
 export function logout() {

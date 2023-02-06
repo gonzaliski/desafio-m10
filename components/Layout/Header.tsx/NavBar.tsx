@@ -51,7 +51,7 @@ const NavBarBox = styled.nav`
   flex-direction: column;
 `;
 
-const NavBarLinks = styled.ul`
+const NavBarLinks = styled.ul<NavBarLinksProps>`
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -95,7 +95,7 @@ const BurgerMenu = ({ onOpen }: any) => {
   );
 };
 
-const BurgerMenuContainer = styled.div`
+const BurgerMenuContainer = styled.div<BurgerMenuContainerProps>`
   width: 2rem;
   height: 2rem;
   display: flex;

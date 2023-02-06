@@ -22,3 +22,23 @@ export const HorizontalBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const ProductsSection = styled.section<ProductsSectionProps>`
+  display: flex;
+  flex-direction: column;
+  background-color: ${(props) => (props.color ? props.color : "transparent")};
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: auto;
+  width: 100vw;
+  gap: 20px;
+  padding: 40px 0;
+
+  .featured__list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+  }
+`;

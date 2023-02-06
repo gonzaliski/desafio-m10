@@ -29,11 +29,15 @@ export const Footer = () => {
           <LargeTextThin>Redes</LargeTextThin>
           <SocialLink>
             <TwitterIcon></TwitterIcon>
-            <TinyText>My Ecommerce</TinyText>
+            <Link href={"https://www.twitter.com"} passHref legacyBehavior>
+              <TinyText>My Ecommerce</TinyText>
+            </Link>
           </SocialLink>
           <SocialLink>
             <InstagramIcon></InstagramIcon>
-            <TinyText>My Ecommerce</TinyText>
+            <Link href={"https://www.instagram.com"} passHref legacyBehavior>
+              <TinyText>My Ecommerce</TinyText>
+            </Link>
           </SocialLink>
         </ContentBox>
       </FooterContentContainer>
