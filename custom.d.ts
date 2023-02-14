@@ -7,7 +7,7 @@ type PageSectionProps = {
   alignCenter?: alignCenter;
 };
 type ProductCardProps = {
-  id: number;
+  id: string;
   title: string;
   desc: string;
   price: number;
@@ -34,6 +34,10 @@ type VerticalBoxProps = {
     | "space-evenly";
 };
 
+type HorizontalBoxProps = {
+  gap?: string;
+};
+
 type HeadingProps = {
   position?: "right" | "left" | "center";
 };
@@ -41,6 +45,11 @@ type HeadingProps = {
 type userData = {
   username?: string;
   telephone?: number;
+};
+type UserStorageData = {
+  username: string;
+  telephone: number;
+  address: string;
 };
 
 type ProductsSectionProps = {

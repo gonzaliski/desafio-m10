@@ -24,7 +24,7 @@ export const SearchBar = () => {
     <>
       <SearchForm onSubmit={handleSubmit}>
         <Input id="query" defaultValue={queryValue}></Input>
-        <SecondaryButton>Buscar</SecondaryButton>
+        <SecondaryButton className="search__button">Buscar</SecondaryButton>
       </SearchForm>
     </>
   );
@@ -37,4 +37,11 @@ const SearchForm = styled.form`
   align-items: center;
   gap: 10px;
   padding-top: 15px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    .search__button {
+      max-width: 120px;
+    }
+  }
 `;

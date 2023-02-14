@@ -46,3 +46,8 @@ export const Label = styled.label`
   font-size: 15px;
   align-self: flex-start;
 `;
+
+export const MainLink = styled.p`
+  font-size: 15px;
+  color: var(--secondary-color);
+`;

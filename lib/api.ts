@@ -26,7 +26,7 @@ export async function validateEmail(email: string) {
   console.log({ email });
   saveEmail(email);
   return await fetchAPI("/auth", {
-    method: "post",
+    method: "POST",
     mode: "cors",
     headers: {
       "Content-type": "application/json",
@@ -42,7 +42,7 @@ export async function getToken(code: string) {
   console.log(email, "from getToken");
 
   const data = await fetchAPI("/auth/token", {
-    method: "post",
+    method: "POST",
     mode: "cors",
     headers: {
       "Content-type": "application/json",
@@ -72,5 +72,18 @@ export async function updateAddress(address: string) {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ newAddress: address }),
+  });
+}
+
+export async function generateOrder(productId: string, address?: string) {
+  return await fetchAPI(`/order?productId=${productId}`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      envio: address,
+    }),
   });
 }

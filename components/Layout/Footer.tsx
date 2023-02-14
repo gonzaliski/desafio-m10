@@ -41,7 +41,7 @@ export const Footer = () => {
           </SocialLink>
         </ContentBox>
       </FooterContentContainer>
-      <TinyText>©2022 apx</TinyText>
+      <TinyText>©{new Date().getFullYear()} apx</TinyText>
     </FooterContainer>
   );
 };
@@ -60,6 +60,10 @@ const FooterContentContainer = styled.div`
   flex-direction: column;
   gap: 90px;
   padding-bottom: 150px;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 const ContentBox = styled.div`

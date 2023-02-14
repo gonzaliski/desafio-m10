@@ -1,9 +1,6 @@
 import { ProfileForm } from "components/Forms";
 import { Layout } from "components/Layout/Layout";
-import { PageSection, VerticalBox } from "ui/boxes";
-import { TertiaryButton } from "ui/buttons";
-import { Input } from "ui/inputs";
-import { Label, Subtitle } from "ui/texts";
+import { PageSection } from "ui/boxes";
 
 export default function Perfil() {
   return (

@@ -1,9 +1,12 @@
+import { getUsername, isUserLogged, logout } from "lib";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 import { HorizontalBox } from "ui/boxes";
-import { LargeTextBold, LightSubtitle } from "ui/texts";
+import { MainButton } from "ui/buttons";
+import { ShoppingCart } from "ui/icons";
+import { LargeTextBold, LightSubtitle, MainLink } from "ui/texts";
 import { SearchBar } from "./SearchBar";
 export const NavBar = () => {
   const router = useRouter();
@@ -13,18 +16,46 @@ export const NavBar = () => {
   };
   return (
     <NavBarBox>
-      <HorizontalBox>
-        <LightSubtitle onClick={() => router.push("/")}>
-          Ecommerce
-        </LightSubtitle>
+      <HorizontalBox className="navbar__items">
+        <HorizontalBox gap={"10px"}>
+          <ShoppingCart />
+          <LightSubtitle
+            onClick={() => router.push("/")}
+            style={{ cursor: "pointer" }}
+          >
+            Ecommerce
+          </LightSubtitle>
+        </HorizontalBox>
         <BurgerMenu onOpen={handleClick} />
+        {router.pathname !== "/" && (
+          <DesktopOnly style={{ width: "60%" }}>
+            <SearchBar />
+          </DesktopOnly>
+        )}
+        <DesktopOnly>
+          {isUserLogged() ? (
+            <SessionInfo />
+          ) : (
+            <MainButton onClick={() => router.push("/ingresar")}>
+              Ingresar
+            </MainButton>
+          )}
+        </DesktopOnly>
       </HorizontalBox>
-      {router.pathname !== "/" && <SearchBar />}
+      {router.pathname !== "/" && (
+        <MobileOnly>
+          <SearchBar />
+        </MobileOnly>
+      )}
       <NavBarLinks active={showContent}>
         <li>
-          <Link href={"/ingresar"} passHref legacyBehavior>
-            <LargeTextBold>Ingresar</LargeTextBold>
-          </Link>
+          {isUserLogged() ? (
+            <SessionInfo />
+          ) : (
+            <Link href={"/ingresar"} passHref legacyBehavior>
+              <LargeTextBold>Ingresar</LargeTextBold>
+            </Link>
+          )}
         </li>
         <li>
           <Link href={"/perfil"} passHref legacyBehavior>
@@ -41,6 +72,31 @@ export const NavBar = () => {
   );
 };
 
+const DesktopOnly = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const MobileOnly = styled.div`
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+const SessionInfo = () => {
+  const router = useRouter();
+  const handleClick = () => {
+    logout();
+    router.push("/");
+    alert("Sesion cerrada");
+  };
+  return (
+    <>
+      <LargeTextBold>{getUsername()}</LargeTextBold>
+      <MainLink onClick={handleClick}>Cerrar sesión</MainLink>
+    </>
+  );
+};
+
 const NavBarBox = styled.nav`
   width: 100vw;
   color: white;
@@ -49,6 +105,14 @@ const NavBarBox = styled.nav`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  @media (min-width: 768px) {
+    .navbar__items {
+      align-items: baseline;
+    }
+  }
+  @media (min-width: 920px) {
+    padding: 15px 30px 15px 30px;
+  }
 `;
 
 const NavBarLinks = styled.ul<NavBarLinksProps>`
@@ -75,6 +139,9 @@ const NavBarLinks = styled.ul<NavBarLinksProps>`
   }
   li:hover {
     color: var(--secondary-color);
+  }
+  @media (min-width: 768px) {
+    display: none;
   }
 `;
 
@@ -120,5 +187,8 @@ const BurgerMenuContainer = styled.div<BurgerMenuContainerProps>`
     &:nth-child(3) {
       transform: ${({ open }) => (open ? "rotate(-44deg)" : "rotate(0)")};
     }
+  }
+  @media (min-width: 768px) {
+    display: none;
   }
 `;

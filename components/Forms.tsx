@@ -1,20 +1,20 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { isUserLogged, saveUserDataOnLS } from "lib";
+import { getToken, updateAddress, updateUser, validateEmail } from "lib/api";
+import { useMe } from "lib/hooks";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { VerticalBox } from "ui/boxes";
 import { TertiaryButton } from "ui/buttons";
 import { Input } from "ui/inputs";
 import { BodyText, Label, Subtitle, TinyText } from "ui/texts";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { number, object, string } from "yup";
-import { getToken, updateAddress, updateUser, validateEmail } from "lib/api";
-import { useMe } from "lib/hooks";
-import { retrieveToken } from "lib";
 
 export const SignInForm = () => {
   const router = useRouter();
-  if (retrieveToken()) router.push("/");
+  if (isUserLogged()) router.push("/");
   const [showCodeForm, setShowCodeForm] = useState(false);
   return (
     <>
@@ -106,7 +106,7 @@ const StyledForm = styled.form`
 `;
 
 const profileSchema = object({
-  name: string().required("Se necesita el nombre"),
+  username: string().required("Se necesita el nombre"),
   address: string().required("Se necesita una direccion"),
   telephone: number()
     .typeError("Ingrese un numero telefonico")
@@ -116,7 +116,7 @@ const profileSchema = object({
 export const ProfileForm = () => {
   const userData = useMe();
   const router = useRouter();
-  if (!retrieveToken()) router.push("/ingresar");
+  if (!isUserLogged()) router.push("/ingresar");
 
   const {
     register,
@@ -132,21 +132,27 @@ export const ProfileForm = () => {
     console.log(data);
 
     if (data.address) await updateAddress(data.address);
-    if (data.name || data.telephone)
-      await updateUser({ username: data.name, telephone: data.telephone });
+    if (data.username || data.telephone)
+      await updateUser({ username: data.username, telephone: data.telephone });
     alert("perfil actualizado");
   };
+  useEffect(() => {
+    if (userData) {
+      const { username, telephone, address } = userData;
+      saveUserDataOnLS({ username, telephone, address });
+    }
+  }, userData);
   return (
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <VerticalBox gap={"15px"}>
           <Subtitle>Perfil</Subtitle>
-          <Label>Nombre completo</Label>
+          <Label>Usuario</Label>
           <Input
             type="text"
-            id="name"
+            id="username"
             defaultValue={userData?.username || ""}
-            {...register("name")}
+            {...register("username")}
           />
           {errors.name && <TinyText>{errors.name.message as string}</TinyText>}
           <Label>Direccion</Label>
@@ -170,7 +176,7 @@ export const ProfileForm = () => {
           {errors.telephone && (
             <TinyText>{errors.telephone.message as string}</TinyText>
           )}
-          <TertiaryButton>Continuar</TertiaryButton>
+          <TertiaryButton>Guardar</TertiaryButton>
         </VerticalBox>
       </StyledForm>
     </>

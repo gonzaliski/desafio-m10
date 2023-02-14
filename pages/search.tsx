@@ -1,22 +1,17 @@
 import { Layout } from "components/Layout/Layout";
 import { SearchProducts } from "components/SearchProducts";
+import { useState } from "react";
 import { ProductsSection } from "ui/boxes";
-import { Subtitle } from "ui/texts";
+import { LargeTextThin, Subtitle } from "ui/texts";
 export default function Search() {
+  const [resultsQuantity, setResultsQuantity] = useState(0);
   return (
     <Layout>
       <ProductsSection>
         <Subtitle>Resultados</Subtitle>
+        <LargeTextThin>{resultsQuantity} resultados </LargeTextThin>
         <div className="featured__list-container">
-          <SearchProducts />
-          {/* {products.map((p: any) => (
-            <ProductCard
-              id={p.objectID}
-              title={p.Name}
-              desc={p.Description}
-              price={p.Unit_cost}
-            />
-          ))} */}
+          <SearchProducts count={setResultsQuantity} />
         </div>
       </ProductsSection>
     </Layout>

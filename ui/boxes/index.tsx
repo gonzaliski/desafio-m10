@@ -18,9 +18,10 @@ export const VerticalBox = styled.div<VerticalBoxProps>`
   gap: ${(props) => props.gap};
 `;
 
-export const HorizontalBox = styled.div`
+export const HorizontalBox = styled.div<HorizontalBoxProps>`
   display: flex;
   justify-content: space-between;
+  gap: ${(props) => props.gap};
 `;
 
 export const ProductsSection = styled.section<ProductsSectionProps>`
@@ -40,5 +41,12 @@ export const ProductsSection = styled.section<ProductsSectionProps>`
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
+  }
+  @media (min-width: 768px) {
+    .featured__list-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 `;

@@ -21,3 +21,24 @@ export function saveEmail(email: string) {
 export function getEmail() {
   return JSON.parse(localStorage.getItem("email") || "");
 }
+
+export function saveUserDataOnLS(data: UserStorageData) {
+  localStorage.setItem("user", JSON.stringify(data));
+}
+
+export function getUserDataFromLS() {
+  if (typeof window !== "undefined") {
+    return JSON.parse(localStorage.getItem("user") || "");
+  }
+}
+
+export function isUserLogged() {
+  const token = retrieveToken();
+  return token !== "";
+}
+export function getUsername() {
+  return getUserDataFromLS()?.username;
+}
+export function getUserAddress() {
+  return getUserDataFromLS()?.address;
+}
