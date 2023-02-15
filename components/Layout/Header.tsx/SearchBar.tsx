@@ -15,10 +15,12 @@ export const SearchBar = () => {
     console.log(e.target.query.value);
 
     e.preventDefault();
-    router.push({
-      pathname: "/search",
-      query: { search: e.target.query.value },
-    });
+    if (!(typeof window === undefined)) {
+      router.push({
+        pathname: "/search",
+        query: { search: e.target.query.value },
+      });
+    }
   };
   return (
     <>

@@ -1,18 +1,17 @@
 import FeaturedProducts from "components/bff";
 import { Layout } from "components/Layout/Layout";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import styled from "styled-components";
 import { PageSection, ProductsSection, VerticalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
 import { Input } from "ui/inputs";
-import { DarkHeading, LightSubtitle } from "ui/texts";
+import { DarkHeading } from "ui/texts";
 
 export default function Home() {
-  const router = useRouter();
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const query = e.target.query.value;
-    router.push({ pathname: "/search", query: { search: query } });
+    Router.push({ pathname: "/search", query: { search: query } });
   };
   return (
     <Layout>

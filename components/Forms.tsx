@@ -2,8 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { isUserLogged, saveUserDataOnLS } from "lib";
 import { getToken, updateAddress, updateUser, validateEmail } from "lib/api";
 import { useMe } from "lib/hooks";
-import { useRouter } from "next/router";
-import { Suspense, useEffect, useState } from "react";
+import Router, { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { VerticalBox } from "ui/boxes";
@@ -13,8 +13,7 @@ import { BodyText, Label, Subtitle, TinyText } from "ui/texts";
 import { number, object, string } from "yup";
 
 export const SignInForm = () => {
-  const router = useRouter();
-  if (isUserLogged()) router.push("/");
+  if (isUserLogged()) Router.push("/");
   const [showCodeForm, setShowCodeForm] = useState(false);
   return (
     <>
@@ -79,11 +78,10 @@ const CodeForm = () => {
     mode: "onBlur",
     resolver: yupResolver(codeSchema),
   });
-  const router = useRouter();
   const onSubmit = async (data: any) => {
     console.log(data);
     await getToken(data.code);
-    router.push("/perfil");
+    Router.push("/perfil");
   };
   return (
     <>
@@ -115,8 +113,7 @@ const profileSchema = object({
 
 export const ProfileForm = () => {
   const userData = useMe();
-  const router = useRouter();
-  if (!isUserLogged()) router.push("/ingresar");
+  if (!isUserLogged()) Router.push("/ingresar");
 
   const {
     register,

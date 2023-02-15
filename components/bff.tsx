@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import { LightSubtitle } from "ui/texts";
 import { ProductCard } from "./products/ProductCard";
-const fetcher = (a, b) => fetch(a, b).then((res) => res.json());
+const fetcher = (a: any, b: any) => fetch(a, b).then((res) => res.json());
 
 export default function FeaturedProducts() {
   const { data } = useSWR("/api/featured-products", fetcher);

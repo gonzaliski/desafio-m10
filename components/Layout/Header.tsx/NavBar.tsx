@@ -1,6 +1,6 @@
 import { getUsername, isUserLogged, logout } from "lib";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
 import { HorizontalBox } from "ui/boxes";
@@ -20,7 +20,7 @@ export const NavBar = () => {
         <HorizontalBox gap={"10px"}>
           <ShoppingCart />
           <LightSubtitle
-            onClick={() => router.push("/")}
+            onClick={() => Router.push("/")}
             style={{ cursor: "pointer" }}
           >
             Ecommerce
@@ -36,7 +36,11 @@ export const NavBar = () => {
           {isUserLogged() ? (
             <SessionInfo />
           ) : (
-            <MainButton onClick={() => router.push("/ingresar")}>
+            <MainButton
+              onClick={() => {
+                router.push("/ingresar");
+              }}
+            >
               Ingresar
             </MainButton>
           )}
@@ -86,7 +90,7 @@ const SessionInfo = () => {
   const router = useRouter();
   const handleClick = () => {
     logout();
-    router.push("/");
+    Router.push("/");
     alert("Sesion cerrada");
   };
   return (

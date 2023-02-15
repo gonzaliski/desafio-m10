@@ -1,7 +1,7 @@
 import { getUserAddress } from "lib";
 import { generateOrder } from "lib/api";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import styled from "styled-components";
 import { VerticalBox } from "ui/boxes";
 import { MainButton, TertiaryButton } from "ui/buttons";
@@ -18,7 +18,7 @@ export const ProductCard = ({
   const handleBuy = async () => {
     const { address } = getUserAddress();
     const { url } = await generateOrder(id, address);
-    router.push(url);
+    Router.push(url);
   };
   return (
     <CardContainer purchasable={purchasable}>
@@ -34,7 +34,7 @@ export const ProductCard = ({
         <Subtitle>{title}</Subtitle>
         <LargeTextThin>${price}</LargeTextThin>
         {!purchasable && (
-          <TertiaryButton size="70%" onClick={() => router.push("/item/" + id)}>
+          <TertiaryButton size="70%" onClick={() => Router.push("/item/" + id)}>
             Ver detalle
           </TertiaryButton>
         )}

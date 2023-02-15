@@ -1,14 +1,13 @@
 import { logout } from "lib";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import styled from "styled-components";
 import { InstagramIcon, TwitterIcon } from "ui/icons";
 import { TinyText, LargeTextThin } from "ui/texts";
 export const Footer = () => {
-  const router = useRouter();
   const handleLogout = () => {
     logout();
-    router.push("/");
+    Router.push("/");
   };
   return (
     <FooterContainer>
