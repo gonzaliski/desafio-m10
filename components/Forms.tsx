@@ -13,8 +13,10 @@ import { BodyText, Label, Subtitle, TinyText } from "ui/texts";
 import { number, object, string } from "yup";
 
 export const SignInForm = () => {
-  if (isUserLogged()) Router.push("/");
   const [showCodeForm, setShowCodeForm] = useState(false);
+  useEffect(() => {
+    if (isUserLogged()) Router.push("/");
+  }, []);
   return (
     <>
       {showCodeForm ? (

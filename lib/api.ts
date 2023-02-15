@@ -87,3 +87,12 @@ export async function generateOrder(productId: string, address?: string) {
     }),
   });
 }
+
+export async function getAllProductIDs() {
+  return await fetchAPI(`/products/ids`, {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
