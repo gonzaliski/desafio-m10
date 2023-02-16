@@ -4,7 +4,7 @@ export function saveToken(token: string) {
 
 export function retrieveToken() {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token") || "";
+    const token = localStorage.getItem("token");
     if (!token) return;
     return JSON.parse(token);
   }
@@ -34,7 +34,7 @@ export function getUserDataFromLS() {
 
 export function isUserLogged() {
   const token = retrieveToken();
-  return token !== "";
+  return !(token == null);
 }
 export function getUsername() {
   return getUserDataFromLS()?.username;

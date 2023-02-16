@@ -1,4 +1,5 @@
 import { getUsername, isUserLogged, logout } from "lib";
+import { GetStaticPropsContext } from "next";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -87,14 +88,14 @@ const MobileOnly = styled.div`
   }
 `;
 const SessionInfo = () => {
-  let username;
+  const [username, setUsername] = useState();
   const handleClick = () => {
     logout();
     Router.push("/");
     alert("Sesion cerrada");
   };
   useEffect(() => {
-    username = getUsername();
+    if (isUserLogged()) setUsername(getUsername());
   }, []);
   return (
     <>

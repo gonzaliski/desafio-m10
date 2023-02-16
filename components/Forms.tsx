@@ -115,8 +115,6 @@ const profileSchema = object({
 
 export const ProfileForm = () => {
   const userData = useMe();
-  if (!isUserLogged()) Router.push("/ingresar");
-
   const {
     register,
     handleSubmit,
@@ -136,11 +134,12 @@ export const ProfileForm = () => {
     alert("perfil actualizado");
   };
   useEffect(() => {
+    if (!isUserLogged()) Router.push("/ingresar");
     if (userData) {
       const { username, telephone, address } = userData;
       saveUserDataOnLS({ username, telephone, address });
     }
-  }, userData);
+  }, [userData]);
   return (
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
