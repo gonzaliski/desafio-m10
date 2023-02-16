@@ -15,7 +15,7 @@ type ProductCardProps = {
   purchasable?: boolean;
 };
 type NavBarLinksProps = {
-  active?: active;
+  active?: boolean;
 };
 
 type BurgerMenuContainerProps = {

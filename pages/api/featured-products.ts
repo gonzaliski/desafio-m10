@@ -4,7 +4,5 @@ export default async function (req: any, res: any) {
   );
   const data = await response.json();
   const products = data.results.slice(0, 3);
-  console.log(products);
-
   res.json(products);
 }

@@ -1,7 +1,7 @@
 import { getUsername, isUserLogged, logout } from "lib";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { HorizontalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
@@ -38,7 +38,7 @@ export const NavBar = () => {
           ) : (
             <MainButton
               onClick={() => {
-                router.push("/ingresar");
+                Router.push("/ingresar");
               }}
             >
               Ingresar
@@ -87,15 +87,18 @@ const MobileOnly = styled.div`
   }
 `;
 const SessionInfo = () => {
-  const router = useRouter();
+  let username;
   const handleClick = () => {
     logout();
     Router.push("/");
     alert("Sesion cerrada");
   };
+  useEffect(() => {
+    username = getUsername();
+  }, []);
   return (
     <>
-      <LargeTextBold>{getUsername()}</LargeTextBold>
+      <LargeTextBold>{username}</LargeTextBold>
       <MainLink onClick={handleClick}>Cerrar sesión</MainLink>
     </>
   );
