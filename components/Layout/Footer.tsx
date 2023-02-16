@@ -1,4 +1,5 @@
 import { logout } from "lib";
+import { getCurrentYear } from "lib/utils";
 import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
@@ -40,7 +41,7 @@ export const Footer = () => {
           </SocialLink>
         </ContentBox>
       </FooterContentContainer>
-      <TinyText>©{new Date().getFullYear()} apx</TinyText>
+      <TinyText>©{getCurrentYear()} apx</TinyText>
     </FooterContainer>
   );
 };
