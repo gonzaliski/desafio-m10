@@ -38,7 +38,7 @@ export async function validateEmail(email: string) {
 }
 
 export async function getToken(code: string) {
-  const { email } = getEmail();
+  const email = getEmail();
   console.log(email, "from getToken");
 
   const data = await fetchAPI("/auth/token", {

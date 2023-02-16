@@ -1,10 +1,9 @@
 import { logout } from "lib";
-import { getCurrentYear } from "lib/utils";
 import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
 import { InstagramIcon, TwitterIcon } from "ui/icons";
-import { TinyText, LargeTextThin } from "ui/texts";
+import { LargeTextThin, TinyText } from "ui/texts";
 export const Footer = () => {
   const handleLogout = () => {
     logout();
@@ -41,7 +40,7 @@ export const Footer = () => {
           </SocialLink>
         </ContentBox>
       </FooterContentContainer>
-      <TinyText>©{getCurrentYear()} apx</TinyText>
+      <TinyText>©2022 apx</TinyText>
     </FooterContainer>
   );
 };

@@ -15,11 +15,12 @@ export function logout() {
 }
 
 export function saveEmail(email: string) {
-  localStorage.setItem("email", JSON.stringify({ email }));
+  localStorage.setItem("email", email);
 }
 
 export function getEmail() {
-  return JSON.parse(localStorage.getItem("email") || "");
+  const email = localStorage.getItem("email");
+  return email;
 }
 
 export function saveUserDataOnLS(data: UserStorageData) {
