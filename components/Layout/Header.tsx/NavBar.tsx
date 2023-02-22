@@ -11,10 +11,14 @@ import { LargeTextBold, LightSubtitle, MainLink } from "ui/texts";
 import { SearchBar } from "./SearchBar";
 export const NavBar = () => {
   const router = useRouter();
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const handleClick = (state: boolean) => {
     setShowContent(state);
   };
+  useEffect(() => {
+    setUserLoggedIn(isUserLogged());
+  }, []);
   return (
     <NavBarBox>
       <HorizontalBox className="navbar__items">
@@ -34,7 +38,7 @@ export const NavBar = () => {
           </DesktopOnly>
         )}
         <DesktopOnly>
-          {isUserLogged() ? (
+          {userLoggedIn ? (
             <SessionInfo />
           ) : (
             <MainButton
@@ -54,7 +58,7 @@ export const NavBar = () => {
       )}
       <NavBarLinks active={showContent}>
         <li>
-          {isUserLogged() ? (
+          {userLoggedIn ? (
             <SessionInfo />
           ) : (
             <Link href={"/ingresar"} passHref legacyBehavior>

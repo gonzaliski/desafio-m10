@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { isUserLogged, saveUserDataOnLS } from "lib";
 import { getToken, updateAddress, updateUser, validateEmail } from "lib/api";
 import { useMe } from "lib/hooks";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";

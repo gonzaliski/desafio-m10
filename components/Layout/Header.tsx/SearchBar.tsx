@@ -7,13 +7,8 @@ import { Input } from "ui/inputs";
 export const SearchBar = () => {
   const router = useRouter();
   const [queryValue, setQueryValue] = useState("");
-  useEffect(() => {
-    const { q } = router.query;
-    setQueryValue(q as string);
-  }, [router.query]);
   const handleSubmit = (e: any) => {
     console.log(e.target.query.value);
-
     e.preventDefault();
     if (!(typeof window === undefined)) {
       router.push({
@@ -22,6 +17,10 @@ export const SearchBar = () => {
       });
     }
   };
+  useEffect(() => {
+    const { q } = router.query;
+    setQueryValue(q as string);
+  }, [router.query]);
   return (
     <>
       <SearchForm onSubmit={handleSubmit}>
