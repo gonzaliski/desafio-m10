@@ -96,3 +96,12 @@ export async function getAllProductIDs() {
     },
   });
 }
+
+export async function getProductByID(productId: string) {
+  return await fetchAPI("/products?productId=" + productId, {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}

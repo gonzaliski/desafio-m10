@@ -1,4 +1,4 @@
-import { getUserAddress } from "lib";
+import { getUserAddress, isUserLogged } from "lib";
 import { generateOrder } from "lib/api";
 import Image from "next/image";
 import Router, { useRouter } from "next/router";
@@ -14,8 +14,8 @@ export const ProductCard = ({
   imgUrl,
   purchasable,
 }: ProductCardProps) => {
-  const router = useRouter();
   const handleBuy = async () => {
+    if (!isUserLogged()) Router.push("/ingresar");
     const { address } = getUserAddress();
     const { url } = await generateOrder(id, address);
     Router.push(url);
@@ -28,6 +28,7 @@ export const ProductCard = ({
           alt={"imagen"}
           height={200}
           width={250}
+          className="product-img"
         ></Image>
       )}
       <VerticalBox gap={"10px"} style={{ padding: "15px", maxWidth: "400px" }}>
@@ -45,9 +46,9 @@ export const ProductCard = ({
   );
 };
 
-interface CardContainerProps {
+type CardContainerProps = {
   purchasable?: boolean;
-}
+};
 
 const CardContainer = styled.div<CardContainerProps>`
   display: flex;
@@ -61,7 +62,13 @@ const CardContainer = styled.div<CardContainerProps>`
   border-radius: 10px;
   background-color: white;
   overflow: auto;
+  .product-img {
+    width: 100%;
+  }
   @media (min-width: 768px) {
-    flex-direction: ${(purchasable) => (purchasable ? "column" : "row")};
+    flex-direction: ${(purchasable) => (purchasable ? "row" : "column")};
+    .product-img {
+      width: ${(purchasable) => (purchasable ? "50%" : "initial")};
+    }
   }
 `;
