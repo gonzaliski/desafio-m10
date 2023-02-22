@@ -23,6 +23,8 @@ export const SearchProducts = (props: any) => {
             desc={p.description}
             price={p.price}
             imgUrl={p.images[0]}
+            detail={false}
+            purchasable={false}
           />
         ))
       ) : (

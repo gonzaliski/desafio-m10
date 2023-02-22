@@ -1,7 +1,7 @@
 import { getUserAddress, isUserLogged } from "lib";
 import { generateOrder } from "lib/api";
 import Image from "next/image";
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import styled from "styled-components";
 import { VerticalBox } from "ui/boxes";
 import { MainButton, TertiaryButton } from "ui/buttons";
@@ -13,6 +13,7 @@ export const ProductCard = ({
   price,
   imgUrl,
   purchasable,
+  detail,
 }: ProductCardProps) => {
   const handleBuy = async () => {
     if (!isUserLogged()) Router.push("/ingresar");
@@ -21,7 +22,7 @@ export const ProductCard = ({
     Router.push(url);
   };
   return (
-    <CardContainer purchasable={purchasable}>
+    <CardContainer purchasable={purchasable} detail={detail}>
       {imgUrl && (
         <Image
           src={imgUrl || ""}
@@ -48,6 +49,7 @@ export const ProductCard = ({
 
 type CardContainerProps = {
   purchasable?: boolean;
+  detail?: boolean;
 };
 
 const CardContainer = styled.div<CardContainerProps>`
@@ -66,9 +68,10 @@ const CardContainer = styled.div<CardContainerProps>`
     width: 100%;
   }
   @media (min-width: 768px) {
-    flex-direction: ${(purchasable) => (purchasable ? "row" : "column")};
+    flex-direction: ${({ detail }) => (detail == true ? "row" : "column")};
+    width: ${(detail) => (detail ? "600px" : "300px")};
     .product-img {
-      width: ${(purchasable) => (purchasable ? "50%" : "initial")};
+      width: ${(detail) => (detail ? "initial" : "50%")};
     }
   }
 `;

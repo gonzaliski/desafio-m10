@@ -13,6 +13,7 @@ type ProductCardProps = {
   price: number;
   imgUrl?: string;
   purchasable?: boolean;
+  detail?: boolean;
 };
 type NavBarLinksProps = {
   active?: boolean;

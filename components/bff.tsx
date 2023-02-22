@@ -17,6 +17,8 @@ export default function FeaturedProducts() {
               desc={p?.description}
               price={p?.price}
               imgUrl={p?.images[0]}
+              purchasable={false}
+              detail={false}
             />
           );
         })}

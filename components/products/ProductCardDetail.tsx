@@ -9,6 +9,7 @@ export const ProductCardDetail = ({ product }: any) => {
       price={product?.price}
       imgUrl={product?.images[0]}
       purchasable={true}
+      detail={true}
     ></ProductCard>
   );
 };
