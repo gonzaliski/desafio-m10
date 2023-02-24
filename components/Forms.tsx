@@ -135,6 +135,8 @@ export const ProfileForm = () => {
   };
   useEffect(() => {
     if (!isUserLogged()) Router.push("/ingresar");
+    console.log("userData:", userData);
+
     if (userData.username) {
       const { username, telephone, address } = userData;
       saveUserDataOnLS({ username, telephone, address });
