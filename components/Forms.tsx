@@ -66,7 +66,7 @@ const EmailForm = (props: any) => {
 };
 
 const codeSchema = object({
-  code: string().required("Ingrese el codigo para continuar"),
+  code: number().required("Ingrese el codigo para continuar"),
 });
 
 const CodeForm = () => {
@@ -90,7 +90,7 @@ const CodeForm = () => {
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <VerticalBox gap={"15px"}>
           <Subtitle>Codigo</Subtitle>
-          <Input type="text" id="code" {...register("code")} />
+          <Input type="number" id="code" {...register("code")} />
           {errors.code && <TinyText>{errors.code.message as string}</TinyText>}
           <TertiaryButton>Enviar</TertiaryButton>
           <BodyText>Te enviaremos un codigo a tu mail</BodyText>
@@ -136,8 +136,7 @@ export const ProfileForm = () => {
   useEffect(() => {
     if (!isUserLogged()) Router.push("/ingresar");
     console.log("userData:", userData);
-
-    if (userData.username) {
+    if (userData) {
       const { username, telephone, address } = userData;
       saveUserDataOnLS({ username, telephone, address });
     }

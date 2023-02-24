@@ -4,7 +4,7 @@ export function saveToken(token: string) {
 
 export function retrieveToken() {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || "";
     if (!token) return;
     return JSON.parse(token);
   }
@@ -28,8 +28,10 @@ export function saveUserDataOnLS(data: UserStorageData) {
 }
 
 export function getUserDataFromLS() {
-  if (typeof window !== "undefined") {
-    return JSON.parse(localStorage.getItem("user") || "");
+  if (typeof window !== undefined) {
+    const userDataLS = localStorage.getItem("user") || "";
+    if (!userDataLS) return;
+    return JSON.parse(userDataLS);
   }
 }
 

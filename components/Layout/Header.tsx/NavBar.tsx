@@ -99,7 +99,7 @@ const SessionInfo = () => {
     alert("Sesion cerrada");
   };
   useEffect(() => {
-    if (isUserLogged()) setUsername(getUsername());
+    if (isUserLogged() && getUsername()) setUsername(getUsername());
   }, []);
   return (
     <>

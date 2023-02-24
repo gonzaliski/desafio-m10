@@ -3,7 +3,6 @@ import { getEmail, retrieveToken, saveEmail, saveToken } from "lib";
 const API_URL = "https://desafio-m9-lovat.vercel.app/api";
 export async function fetchAPI(param: RequestInfo, option: RequestInit) {
   const token = retrieveToken();
-  console.log(token);
   const init: any = option || {};
   if (token) {
     init.headers ||= {};
@@ -38,9 +37,9 @@ export async function validateEmail(email: string) {
   });
 }
 
-export async function getToken(code: string) {
+export async function getToken(code: number) {
   const email = getEmail();
-  console.log(email, "from getToken");
+  console.log(email, code, "from getToken");
 
   const data = await fetchAPI("/auth/token", {
     method: "POST",
@@ -50,8 +49,10 @@ export async function getToken(code: string) {
     },
     body: JSON.stringify({ email, code }),
   });
+  console.log(data);
+
   saveToken(data.token);
-  return true;
+  return;
 }
 
 export async function updateUser(data: userData) {
