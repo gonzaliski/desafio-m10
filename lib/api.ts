@@ -3,6 +3,7 @@ import { getEmail, retrieveToken, saveEmail, saveToken } from "lib";
 const API_URL = "https://desafio-m9-lovat.vercel.app/api";
 export async function fetchAPI(param: RequestInfo, option: RequestInit) {
   const token = retrieveToken();
+  console.log(token);
   const init: any = option || {};
   if (token) {
     init.headers ||= {};
