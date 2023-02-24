@@ -64,3 +64,7 @@ type MainButtonProps = {
 type ProductCardDetailProps = {
   id: string;
 };
+
+type SessionInfoProps = {
+  handleLogout: (value: boolean) => any;
+};

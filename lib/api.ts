@@ -10,7 +10,9 @@ export async function fetchAPI(param: RequestInfo, option: RequestInit) {
     init.headers["Content-type"] = "application/json";
   }
 
+  console.log(param, init);
   const res = await fetch(API_URL + param, init);
+
   if (res.status >= 200 && res.status < 300) {
     const data = await res.json();
     return data;
@@ -77,7 +79,9 @@ export async function updateAddress(address: string) {
   });
 }
 
-export async function generateOrder(productId: string, address?: string) {
+export async function generateOrder(productId: string, address: string) {
+  console.log(address);
+
   return await fetchAPI(`/order?productId=${productId}`, {
     method: "POST",
     mode: "cors",

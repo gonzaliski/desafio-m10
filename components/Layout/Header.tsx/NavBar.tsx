@@ -39,7 +39,7 @@ export const NavBar = () => {
         )}
         <DesktopOnly>
           {userLoggedIn ? (
-            <SessionInfo />
+            <SessionInfo handleLogout={setUserLoggedIn} />
           ) : (
             <MainButton
               onClick={() => {
@@ -59,7 +59,7 @@ export const NavBar = () => {
       <NavBarLinks active={showContent}>
         <li>
           {userLoggedIn ? (
-            <SessionInfo />
+            <SessionInfo handleLogout={setUserLoggedIn} />
           ) : (
             <Link href={"/ingresar"} passHref legacyBehavior>
               <LargeTextBold>Ingresar</LargeTextBold>
@@ -91,10 +91,11 @@ const MobileOnly = styled.div`
     display: none;
   }
 `;
-const SessionInfo = () => {
+const SessionInfo = ({ handleLogout }: SessionInfoProps) => {
   const [username, setUsername] = useState();
   const handleClick = () => {
     logout();
+    handleLogout(false);
     Router.push("/");
     alert("Sesion cerrada");
   };

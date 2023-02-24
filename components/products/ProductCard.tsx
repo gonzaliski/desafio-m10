@@ -17,8 +17,11 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   const handleBuy = async () => {
     if (!isUserLogged()) Router.push("/ingresar");
-    const { address } = getUserAddress();
-    const { url } = await generateOrder(id, address);
+    const address = getUserAddress();
+    const productData = { title, desc, price, imgUrl };
+    const { url } = await generateOrder(id, address, productData);
+    console.log(url);
+
     Router.push(url);
   };
   return (
@@ -71,7 +74,7 @@ const CardContainer = styled.div<CardContainerProps>`
     flex-direction: ${({ detail }) => (detail == true ? "row" : "column")};
     width: ${(detail) => (detail ? "600px" : "300px")};
     .product-img {
-      width: ${(detail) => (detail ? "initial" : "50%")};
+      width: ${(detail) => (detail ? "50%" : "initial")};
     }
   }
 `;

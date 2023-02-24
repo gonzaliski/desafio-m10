@@ -137,6 +137,8 @@ export const ProfileForm = () => {
     if (!isUserLogged()) Router.push("/ingresar");
     console.log("userData:", userData);
     if (userData) {
+      console.log("guardar en la wea");
+
       const { username, telephone, address } = userData;
       saveUserDataOnLS({ username, telephone, address });
     }

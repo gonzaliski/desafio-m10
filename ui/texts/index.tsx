@@ -49,5 +49,6 @@ export const Label = styled.label`
 
 export const MainLink = styled.p`
   font-size: 15px;
+  cursor: pointer;
   color: var(--secondary-color);
 `;
