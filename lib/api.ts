@@ -79,7 +79,11 @@ export async function updateAddress(address: string) {
   });
 }
 
-export async function generateOrder(productId: string, address: string) {
+export async function generateOrder(
+  productId: string,
+  address: string,
+  productData: any
+) {
   console.log(address);
 
   return await fetchAPI(`/order?productId=${productId}`, {
@@ -90,6 +94,7 @@ export async function generateOrder(productId: string, address: string) {
     },
     body: JSON.stringify({
       envio: address,
+      productData,
     }),
   });
 }
