@@ -72,9 +72,9 @@ const CardContainer = styled.div<CardContainerProps>`
   }
   @media (min-width: 768px) {
     flex-direction: ${({ detail }) => (detail == true ? "row" : "column")};
-    width: ${(detail) => (detail ? "600px" : "300px")};
+    width: ${({ detail }) => (detail == true ? "600px" : "300px")};
     .product-img {
-      width: ${(detail) => (detail ? "50%" : "initial")};
+      width: ${({ detail }) => (detail == true ? "50%" : "initial")};
     }
   }
 `;

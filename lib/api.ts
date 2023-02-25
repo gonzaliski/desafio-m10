@@ -82,7 +82,7 @@ export async function updateAddress(address: string) {
 export async function generateOrder(
   productId: string,
   address: string,
-  productData: any
+  productData: ProductData
 ) {
   console.log(address);
 

@@ -68,3 +68,10 @@ type ProductCardDetailProps = {
 type SessionInfoProps = {
   handleLogout: (value: boolean) => any;
 };
+
+type ProductData = {
+  title: string;
+  desc: string;
+  price: number;
+  imgUrl?: string;
+};
