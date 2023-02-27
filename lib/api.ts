@@ -9,10 +9,7 @@ export async function fetchAPI(param: RequestInfo, option: RequestInit) {
     init.headers.Authorization = "Bearer " + token;
     init.headers["Content-type"] = "application/json";
   }
-
-  console.log(param, init);
   const res = await fetch(API_URL + param, init);
-
   if (res.status >= 200 && res.status < 300) {
     const data = await res.json();
     return data;

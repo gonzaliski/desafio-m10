@@ -11,7 +11,7 @@ export default function Home() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const query = e.target.query.value;
-    Router.push({ pathname: "/search", query: { search: query } });
+    if (query) Router.push({ pathname: "/search", query: { search: query } });
   };
   return (
     <Layout>

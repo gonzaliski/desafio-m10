@@ -10,7 +10,7 @@ export const SearchBar = () => {
   const handleSubmit = (e: any) => {
     console.log(e.target.query.value);
     e.preventDefault();
-    if (!(typeof window === undefined)) {
+    if (!(typeof window === undefined) && e.target.query.value) {
       router.push({
         pathname: "/search",
         query: { search: e.target.query.value },
@@ -18,8 +18,8 @@ export const SearchBar = () => {
     }
   };
   useEffect(() => {
-    const { q } = router.query;
-    setQueryValue(q as string);
+    const { search } = router.query;
+    setQueryValue(search as string);
   }, [router.query]);
   return (
     <>

@@ -9,7 +9,6 @@ export const SearchProducts = (props: any) => {
   const products = useProducts(router.query.search as string);
   console.log(products);
 
-  console.log(products?.results);
   useEffect(() => {
     props.count(products?.results.length);
   }, [products?.results]);
