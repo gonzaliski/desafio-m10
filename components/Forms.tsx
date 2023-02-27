@@ -129,8 +129,14 @@ export const ProfileForm = () => {
     console.log(data);
 
     if (data.address) await updateAddress(data.address);
-    if (data.username || data.telephone)
+    if (data.username || data.telephone) {
       await updateUser({ username: data.username, telephone: data.telephone });
+    }
+    saveUserDataOnLS({
+      username: data.username,
+      telephone: data.telephone,
+      address: data.address,
+    });
     alert("perfil actualizado");
   };
   useEffect(() => {

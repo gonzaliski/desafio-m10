@@ -11,7 +11,9 @@ export function retrieveToken() {
 }
 
 export function logout() {
-  return localStorage.removeItem("token");
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  localStorage.removeItem("email");
 }
 
 export function saveEmail(email: string) {
