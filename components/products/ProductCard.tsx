@@ -27,13 +27,15 @@ export const ProductCard = ({
   return (
     <CardContainer purchasable={purchasable} detail={detail}>
       {imgUrl && (
-        <Image
-          src={imgUrl || ""}
-          alt={"imagen"}
-          height={200}
-          width={250}
-          className="product-img"
-        ></Image>
+        <ImageWrapper>
+          <Image
+            src={imgUrl || ""}
+            alt={"imagen"}
+            height={200}
+            width={250}
+            className="product-img"
+          ></Image>
+        </ImageWrapper>
       )}
       <VerticalBox gap={"10px"} style={{ padding: "15px", maxWidth: "400px" }}>
         <Subtitle>{title}</Subtitle>
@@ -50,6 +52,11 @@ export const ProductCard = ({
   );
 };
 
+const ImageWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+`;
+
 type CardContainerProps = {
   purchasable?: boolean;
   detail?: boolean;
@@ -61,20 +68,18 @@ const CardContainer = styled.div<CardContainerProps>`
   text-align: left;
   gap: 15px;
   padding: 0px 0px 15px 0px;
-  max-height: ${({ purchasable }) => (purchasable ? "80%" : "380px")};
   max-width: ${({ purchasable }) => (purchasable ? "70%" : "280px")};
   height: 100%;
   border-radius: 10px;
   background-color: white;
-  overflow: auto;
   .product-img {
-    width: 100%;
+    min-width: 100%;
+    object-fit: ${({ detail }) => (detail == true ? "scale-down" : "cover")};
   }
   @media (min-width: 768px) {
-    flex-direction: ${({ detail }) => (detail == true ? "row" : "column")};
-    width: ${({ detail }) => (detail == true ? "600px" : "300px")};
+    width: ${({ detail }) => (detail == true ? "" : "300px")};
     .product-img {
-      width: ${({ detail }) => (detail == true ? "50%" : "initial")};
+      width: ${({ detail }) => (detail == true ? "50%" : "")};
     }
   }
 `;

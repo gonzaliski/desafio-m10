@@ -5,6 +5,8 @@ export const PageSection = styled.section<PageSectionProps>`
   flex-direction: column;
   align-items: ${(props) => (props.alignCenter ? "center" : "none")};
   gap: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   justify-content: center;
   height: ${(props) => (props.sm ? "30vh" : "70vh")};
   width: ${(props) => props.width};

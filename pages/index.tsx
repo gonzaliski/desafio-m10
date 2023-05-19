@@ -1,6 +1,8 @@
 import FeaturedProducts from "components/bff";
 import { Layout } from "components/Layout/Layout";
+import { sync } from "lib/api";
 import Router from "next/router";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { PageSection, ProductsSection, VerticalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
@@ -13,6 +15,16 @@ export default function Home() {
     const query = e.target.query.value;
     if (query) Router.push({ pathname: "/search", query: { search: query } });
   };
+  useEffect(() => {
+    const syncProds = async () => {
+      try {
+        await sync();
+      } catch (e) {
+        console.error("failed to get products");
+      }
+    };
+    syncProds();
+  }, []);
   return (
     <Layout>
       <PageSection>

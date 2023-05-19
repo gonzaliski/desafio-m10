@@ -104,6 +104,14 @@ export async function getAllProductIDs() {
     },
   });
 }
+export async function sync() {
+  return await fetchAPI(`/sync`, {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
 
 export async function getProductByID(productId: string) {
   return await fetchAPI("/products?productId=" + productId, {
