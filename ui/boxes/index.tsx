@@ -26,12 +26,11 @@ export const HorizontalBox = styled.div<HorizontalBoxProps>`
   gap: ${(props) => props.gap};
 `;
 
-export const ProductsSection = styled.section<ProductsSectionProps>`
+export const LongSection = styled.section<LongSectionProps>`
   display: flex;
   flex-direction: column;
   background-color: ${(props) => (props.color ? props.color : "transparent")};
   align-items: center;
-  text-align: center;
   justify-content: center;
   height: auto;
   width: 100vw;

@@ -12,8 +12,6 @@ type ProductCardProps = {
   desc: string;
   price: number;
   imgUrl?: string;
-  purchasable?: boolean;
-  detail?: boolean;
 };
 type NavBarLinksProps = {
   active?: boolean;
@@ -53,7 +51,7 @@ type UserStorageData = {
   address: string;
 };
 
-type ProductsSectionProps = {
+type LongSectionProps = {
   color?: string;
 };
 
@@ -63,6 +61,10 @@ type MainButtonProps = {
 
 type ProductCardDetailProps = {
   id: string;
+  title: string;
+  description: string;
+  price: number;
+  imageUrl?: string;
 };
 
 type SessionInfoProps = {

@@ -13,27 +13,7 @@
 
 body {
   margin: 0;
-  background: linear-gradient(
-    0deg,
-    hsl(198deg 17% 20%),
-    hsl(232deg 23% 31%),
-    hsl(266deg 30% 41%),
-    hsl(301deg 38% 50%),
-    hsl(335deg 62% 57%),
-    hsl(353deg 79% 62%),
-    hsl(356deg 83% 65%),
-    hsl(358deg 88% 68%),
-    hsl(1deg 93% 71%),
-    hsl(4deg 100% 74%),
-    hsl(8deg 100% 76%),
-    hsl(13deg 99% 78%),
-    hsl(18deg 99% 80%),
-    hsl(23deg 98% 82%),
-    hsl(36deg 81% 82%),
-    hsl(56deg 57% 78%),
-    hsl(97deg 27% 70%),
-    hsl(118deg 18% 66%)
-  );
+  background-color: white;
   height: 100%;
   width: 100%;
   position: relative;

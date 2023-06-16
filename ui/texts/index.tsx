@@ -16,6 +16,10 @@ export const Subtitle = styled.h2`
   margin: 0;
 `;
 
+export const ThinSubtitle = styled(Subtitle)`
+  font-weight: 400;
+`;
+
 export const LightSubtitle = styled(Subtitle)`
   color: white;
 `;

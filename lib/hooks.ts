@@ -8,9 +8,9 @@ export function useMe() {
   return res;
 }
 
-export function useProducts(query: string | undefined, offset?: string) {
+export function useProducts(query: string | undefined, offset = 20) {
   const { data, error } = useSWRImmutable(
-    `/search?search=${query}&limit=20&offset=${offset || 20}`,
+    `/search?search=${query}&limit=20&offset=${offset}`,
     fetchAPI
   );
   const res = data ? data : null;

@@ -1,8 +1,7 @@
 export default async function (req: any, res: any) {
-  const response = await fetch(
-    "https://desafio-m9-lovat.vercel.app/api/search?search=chair&limit=20&offset=20"
-  );
+  const url = "http://localhost:3001/api";
+  const response = await fetch(url + "/search?search=nike&limit=20&offset=20");
   const data = await response.json();
-  const products = data.results.slice(0, 3);
+  const products = data.results;
   res.json(products);
 }

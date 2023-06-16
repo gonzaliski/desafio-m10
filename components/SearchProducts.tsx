@@ -2,7 +2,7 @@ import { useProducts } from "lib/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { LargeTextBold } from "ui/texts";
-import { ProductCard } from "./products/ProductCard";
+import { ProductCard } from "./product/ProductCard";
 
 export const SearchProducts = (props: any) => {
   const router = useRouter();
@@ -21,9 +21,7 @@ export const SearchProducts = (props: any) => {
             title={p.title}
             desc={p.description}
             price={p.price}
-            imgUrl={p.images[0]}
-            detail={false}
-            purchasable={false}
+            imgUrl={p.imageUrl}
           />
         ))
       ) : (

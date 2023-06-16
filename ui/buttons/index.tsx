@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
 export const MainButton = styled.button<MainButtonProps>`
+  text-transform: uppercase;
   max-width: 350px;
   min-width: 90px;
   width: ${(props) => props.size || "100%"};
   max-height: 45px;
-  border-radius: 10px;
+  border-radius: 15px;
   border-style: none;
   color: white;
   font-size: 15px;
   font-weight: 500;
   font-family: "Roboto";
-  padding: 10px;
+  padding: 15px 10px 15px 10px;
   background-color: var(--secondary-color);
   cursor: pointer;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,

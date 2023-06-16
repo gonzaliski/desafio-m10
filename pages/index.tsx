@@ -2,14 +2,19 @@ import FeaturedProducts from "components/bff";
 import { Layout } from "components/Layout/Layout";
 import { sync } from "lib/api";
 import Router from "next/router";
+import { GetServerSideProps } from "next/types";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { PageSection, ProductsSection, VerticalBox } from "ui/boxes";
+import { PageSection, LongSection, VerticalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
 import { Input } from "ui/inputs";
 import { DarkHeading } from "ui/texts";
 
-export default function Home() {
+export default function Home({
+  featuredProducts,
+}: {
+  featuredProducts: ProductCardProps[];
+}) {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const query = e.target.query.value;
@@ -39,9 +44,9 @@ export default function Home() {
           </QueryForm>
         </VerticalBox>
       </PageSection>
-      <ProductsSection color="var(--primary-color)">
-        <FeaturedProducts></FeaturedProducts>
-      </ProductsSection>
+      <LongSection color="var(--primary-color)">
+        <FeaturedProducts products={featuredProducts}></FeaturedProducts>
+      </LongSection>
     </Layout>
   );
 }
@@ -54,3 +59,17 @@ const QueryForm = styled.form`
   align-items: center;
   margin: 0 auto;
 `;
+export const getServerSideProps: GetServerSideProps<{
+  featuredProducts: ProductCardProps;
+}> = async () => {
+  let url;
+  if (process.env.NODE_ENV == "development") {
+    url = process.env.LOCAL_API;
+  } else {
+    url = process.env.PROD_API;
+  }
+
+  const res = await fetch(url + "/api/featured-products");
+  const products = await res.json();
+  return { props: { featuredProducts: products } };
+};

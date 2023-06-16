@@ -1,6 +1,7 @@
 import { getEmail, retrieveToken, saveEmail, saveToken } from "lib";
 
-const API_URL = "https://desafio-m9-lovat.vercel.app/api";
+// const API_URL = "https://desafio-m9-lovat.vercel.app/api";
+const API_URL = "http://localhost:3001/api";
 export async function fetchAPI(param: RequestInfo, option: RequestInit) {
   const token = retrieveToken();
   const init: any = option || {};
