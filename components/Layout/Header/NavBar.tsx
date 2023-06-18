@@ -1,5 +1,4 @@
 import { getUsername, isUserLogged, logout } from "lib";
-import { GetStaticPropsContext } from "next";
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ import { MainButton } from "ui/buttons";
 import { ShoppingCart } from "ui/icons";
 import { LargeTextBold, LightSubtitle, MainLink } from "ui/texts";
 import { SearchBar } from "./SearchBar";
+import { BsPerson } from "react-icons/bs";
 export const NavBar = () => {
   const router = useRouter();
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -32,30 +32,25 @@ export const NavBar = () => {
           </LightSubtitle>
         </HorizontalBox>
         <BurgerMenu onOpen={handleClick} />
-        {router.pathname !== "/" && (
-          <DesktopOnly style={{ width: "60%" }}>
-            <SearchBar />
-          </DesktopOnly>
-        )}
+        <DesktopOnly style={{ width: "60%" }}>
+          <SearchBar />
+        </DesktopOnly>
         <DesktopOnly>
           {userLoggedIn ? (
             <SessionInfo handleLogout={setUserLoggedIn} />
           ) : (
-            <MainButton
+            <BsPerson
+              className="icon"
               onClick={() => {
                 Router.push("/ingresar");
               }}
-            >
-              Ingresar
-            </MainButton>
+            ></BsPerson>
           )}
         </DesktopOnly>
       </HorizontalBox>
-      {router.pathname !== "/" && (
-        <MobileOnly>
-          <SearchBar />
-        </MobileOnly>
-      )}
+      <MobileOnly>
+        <SearchBar />
+      </MobileOnly>
       <NavBarLinks active={showContent}>
         <li>
           {userLoggedIn ? (
@@ -82,11 +77,15 @@ export const NavBar = () => {
 };
 
 const DesktopOnly = styled.div`
+  .icon {
+    font-size: x-large;
+  }
   @media (max-width: 768px) {
     display: none;
   }
 `;
 const MobileOnly = styled.div`
+  display: flex;
   @media (min-width: 768px) {
     display: none;
   }

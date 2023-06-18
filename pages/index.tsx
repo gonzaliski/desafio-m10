@@ -1,14 +1,14 @@
-import FeaturedProducts from "components/bff";
 import { Layout } from "components/Layout/Layout";
+import FeaturedProducts from "components/bff";
 import { sync } from "lib/api";
+import Image from "next/image";
 import Router from "next/router";
 import { GetServerSideProps } from "next/types";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { PageSection, LongSection, VerticalBox } from "ui/boxes";
-import { MainButton } from "ui/buttons";
-import { Input } from "ui/inputs";
-import { DarkHeading } from "ui/texts";
+import { LongSection, PageSection, VerticalBox } from "ui/boxes";
+import { DarkHeading, LightHeading } from "ui/texts";
+import Puma from "../public/puma.jpg";
 
 export default function Home({
   featuredProducts,
@@ -34,14 +34,10 @@ export default function Home({
     <Layout>
       <PageSection>
         <VerticalBox>
-          <DarkHeading position={"center"}>El mejor Ecommerce</DarkHeading>
-          <QueryForm onSubmit={handleSubmit}>
-            <Input
-              placeholder="encontrá tu producto ideal"
-              name="query"
-            ></Input>
-            <MainButton>Buscar</MainButton>
-          </QueryForm>
+          <CarouselWrapper>
+            <Image src={Puma} alt={"puma"} className="img"></Image>
+          </CarouselWrapper>
+          <LightHeading position={"center"}>El mejor Ecommerce</LightHeading>
         </VerticalBox>
       </PageSection>
       <LongSection color="var(--primary-color)">
@@ -51,14 +47,24 @@ export default function Home({
   );
 }
 
-const QueryForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 65vw;
-  align-items: center;
-  margin: 0 auto;
+const CarouselWrapper = styled.div`
+  position: absolute;
+  overflow: hidden;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  .img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+  }
+  @media (min-width: 768px) {
+  }
 `;
+
 export const getServerSideProps: GetServerSideProps<{
   featuredProducts: ProductCardProps;
 }> = async () => {

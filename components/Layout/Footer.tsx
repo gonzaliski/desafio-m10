@@ -9,10 +9,12 @@ export const Footer = () => {
     logout();
     Router.push("/");
   };
+  let actualYear = new Date().getFullYear();
   return (
     <FooterContainer>
       <FooterContentContainer>
         <ContentBox>
+          <LargeTextThin>Atajos</LargeTextThin>
           <Link href={"/ingresar"} passHref legacyBehavior>
             <TinyText>Ingresar</TinyText>
           </Link>
@@ -29,18 +31,18 @@ export const Footer = () => {
           <SocialLink>
             <TwitterIcon></TwitterIcon>
             <Link href={"https://www.twitter.com"} passHref legacyBehavior>
-              <TinyText>My Ecommerce</TinyText>
+              <TinyText>Gonzalo Méndez Stefano</TinyText>
             </Link>
           </SocialLink>
           <SocialLink>
             <InstagramIcon></InstagramIcon>
             <Link href={"https://www.instagram.com"} passHref legacyBehavior>
-              <TinyText>My Ecommerce</TinyText>
+              <TinyText>Gonzalo Méndez Stefano</TinyText>
             </Link>
           </SocialLink>
         </ContentBox>
+        <TinyText>@{actualYear} apx</TinyText>
       </FooterContentContainer>
-      <TinyText>©2022 apx</TinyText>
     </FooterContainer>
   );
 };
@@ -61,7 +63,7 @@ const FooterContentContainer = styled.div`
   padding-bottom: 150px;
   @media (min-width: 768px) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
   }
 `;
 

@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { VerticalBox } from "ui/boxes";
 import { TertiaryButton } from "ui/buttons";
 import { Input } from "ui/inputs";
-import { BodyText, Label, Subtitle, TinyText } from "ui/texts";
+import { MediumText, Label, Subtitle, TinyText } from "ui/texts";
 import { number, object, string } from "yup";
 
 export const SignInForm = () => {
@@ -93,7 +93,7 @@ const CodeForm = () => {
           <Input type="number" id="code" {...register("code")} />
           {errors.code && <TinyText>{errors.code.message as string}</TinyText>}
           <TertiaryButton>Enviar</TertiaryButton>
-          <BodyText>Te enviaremos un codigo a tu mail</BodyText>
+          <MediumText>Te enviaremos un codigo a tu mail</MediumText>
         </VerticalBox>
       </StyledForm>
     </>

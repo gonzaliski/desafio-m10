@@ -10,3 +10,12 @@ export const Input = styled.input`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   overflow: hidden;
 `;
+
+export const SearchInput = styled(Input)`
+  height: 35px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  &:focus {
+    outline-color: black;
+  }
+`;

@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { SecondaryButton } from "ui/buttons";
-import { Input } from "ui/inputs";
+import { SearchButton } from "ui/buttons";
+import { SearchInput } from "ui/inputs";
+import { MdSearch } from "react-icons/md";
 
 export const SearchBar = () => {
   const router = useRouter();
@@ -24,8 +25,10 @@ export const SearchBar = () => {
   return (
     <>
       <SearchForm onSubmit={handleSubmit}>
-        <Input id="query" defaultValue={queryValue}></Input>
-        <SecondaryButton className="search__button">Buscar</SecondaryButton>
+        <SearchInput id="query" defaultValue={queryValue}></SearchInput>
+        <SearchButton>
+          <MdSearch />
+        </SearchButton>
       </SearchForm>
     </>
   );
@@ -34,11 +37,10 @@ export const SearchBar = () => {
 const SearchForm = styled.form`
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  justify-content: center;
   padding-top: 15px;
   @media (min-width: 768px) {
+    padding-top: 0px;
     flex-direction: row;
     justify-content: center;
     .search__button {

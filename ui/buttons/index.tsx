@@ -42,3 +42,15 @@ export const BorderButton = styled(MainButton)`
     transition: all 0.5s ease-out;
   }
 `;
+export const SearchButton = styled.button`
+  border-style: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 35px;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  place-items: center;
+  background-color: white;
+  color: black;
+`;

@@ -9,7 +9,6 @@ type PageSectionProps = {
 type ProductCardProps = {
   id: string;
   title: string;
-  desc: string;
   price: number;
   imgUrl?: string;
 };
@@ -64,7 +63,7 @@ type ProductCardDetailProps = {
   title: string;
   description: string;
   price: number;
-  imageUrl?: string;
+  images: string[];
 };
 
 type SessionInfoProps = {
@@ -76,4 +75,8 @@ type ProductData = {
   desc: string;
   price: number;
   imgUrl?: string;
+};
+
+type SizeSelectorProps = {
+  onChange?: (a: string) => void;
 };

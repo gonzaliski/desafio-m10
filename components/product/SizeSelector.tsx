@@ -1,7 +1,21 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { BodyText } from "ui/texts";
+import { MediumText } from "ui/texts";
 
-export const SizeSelector = () => {
+export const SizeSelector = ({ onChange }: SizeSelectorProps) => {
+  const [selected, setSelected] = useState("");
+  const sizesAvaiable = [
+    "40",
+    "40.5",
+    "41",
+    "41.5",
+    "42",
+    "42.5",
+    "43",
+    "43.5",
+    "44",
+    "44.5",
+  ];
   const sizes = [
     "37",
     "37.5",
@@ -24,12 +38,23 @@ export const SizeSelector = () => {
     "46",
     "46.5",
   ];
+  const handleChange = (value: string) => {
+    setSelected(value);
+    if (onChange) onChange(value);
+  };
   return (
     <SizesContainer>
-      <BodyText>Talles</BodyText>
+      <MediumText>Talles</MediumText>
       <SizesList>
-        {sizes.map((s) => (
-          <SizeItem>{s}</SizeItem>
+        {sizes.map((value, index) => (
+          <SizeItem
+            disabled={!sizesAvaiable.includes(value)}
+            onClick={() => handleChange(value)}
+            active={value == selected}
+            key={index}
+          >
+            {value}
+          </SizeItem>
         ))}
       </SizesList>
     </SizesContainer>
@@ -48,10 +73,16 @@ const SizesList = styled.div`
   flex-wrap: wrap;
   gap: 10px;
 `;
-const SizeItem = styled.button`
-  background-color: white;
+const SizeItem = styled.button<{ active: boolean }>`
+  cursor: pointer;
+  background-color: ${({ active }) => (active ? "black" : "white")};
+  color: ${({ active }) => (active ? "white" : "initial")};
   font-size: small;
   padding: 10px;
   border: 1px solid gray;
   border-radius: 40%;
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Footer } from "./Footer";
-import { NavBar } from "./Header.tsx/NavBar";
+import { NavBar } from "./Header/NavBar";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -14,6 +14,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 };
 
 const PageWrapper = styled.div`
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   min-height: 100vh;

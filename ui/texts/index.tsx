@@ -33,16 +33,16 @@ export const LargeTextThin = styled(LargeTextBold)`
   font-weight: 400;
 `;
 
-export const BodyText = styled.p`
+export const MediumText = styled.p`
   font-size: 16px;
   margin: 0;
 `;
 
-export const BodyTextBold = styled(BodyText)`
+export const MediumTextBold = styled(MediumText)`
   font-weight: 600;
 `;
 
-export const TinyText = styled(BodyText)`
+export const TinyText = styled(MediumText)`
   font-weight: 300;
 `;
 
