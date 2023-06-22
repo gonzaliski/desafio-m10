@@ -1,7 +1,12 @@
 import { DetailCarousel } from "components/Carousel/DetailCarousel";
+import { FavouriteButton } from "components/FavouriteButton";
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSetRecoilState } from "recoil";
 import { shoppingCartState } from "recoil/atoms";
 import styled from "styled-components";
+import { HorizontalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
 import { MdText, Subtitle, ThinSubtitle } from "ui/texts";
 import { SizeSelector } from "./SizeSelector";
@@ -11,9 +16,10 @@ export const ProductCardDetail = ({
 }: {
   product: ProductCardDetailProps;
 }) => {
+  const [selectedSize, setSelectedSize] = useState("");
   const setNewItem = useSetRecoilState(shoppingCartState);
   const handleSizeSelection = (size: string) => {
-    console.log(size);
+    setSelectedSize(size);
   };
   const addToCart = () => {
     setNewItem((prevItems) => [
@@ -25,17 +31,30 @@ export const ProductCardDetail = ({
         price: product.price,
       },
     ]);
+    toast.success("Producto agregado al carrito", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+    });
   };
   return (
     <ProductDetail>
-      {/* <CarouselWrapper> */}
       <DetailCarousel images={product.images}></DetailCarousel>
-      {/* </CarouselWrapper> */}
       <ProductInformation>
         <ThinSubtitle>{product.title}</ThinSubtitle>
         <Subtitle>${product.price}</Subtitle>
         <SizeSelector onChange={handleSizeSelection}></SizeSelector>
-        <MainButton onClick={addToCart}>Agregar al carrito</MainButton>
+        <HorizontalBox gap="20px">
+          <MainButton onClick={addToCart} disabled={selectedSize == ""}>
+            Agregar al carrito
+          </MainButton>
+          <ToastContainer />
+          <FavouriteButton />
+        </HorizontalBox>
         <ThinSubtitle>Descripcion</ThinSubtitle>
         <MdText>{product.description}</MdText>
       </ProductInformation>

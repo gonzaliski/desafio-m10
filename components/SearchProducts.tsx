@@ -17,9 +17,8 @@ export const SearchProducts = (props: any) => {
       {products?.results.length !== 0 ? (
         products?.results.map((p: any) => (
           <ProductCard
-            id={p.objectID}
+            id={p.id}
             title={p.title}
-            desc={p.description}
             price={p.price}
             imgUrl={p.imageUrl}
           />

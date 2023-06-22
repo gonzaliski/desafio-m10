@@ -1,9 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { LoadingSpinner } from "components/LoadingSpinner";
 import { isUserLogged, saveUserDataOnLS } from "lib";
 import { updateAddress, updateUser } from "lib/api";
 import { useMe } from "lib/hooks";
 import Router from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { TertiaryButton } from "ui/buttons";
 import { StyledForm, FormItems } from "ui/forms";
@@ -19,12 +20,11 @@ const profileSchema = object({
 });
 
 export const ProfileForm = () => {
+  const [loading, setLoading] = useState(true);
   const userData = useMe();
   const {
     register,
     handleSubmit,
-    // clearErrors,
-    // setValue,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -52,45 +52,50 @@ export const ProfileForm = () => {
 
       const { username, telephone, address } = userData;
       saveUserDataOnLS({ username, telephone, address });
+      setLoading(false);
     }
   }, [userData]);
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <FormItems gap={"15px"}>
-        <Subtitle>Perfil</Subtitle>
-        <Label>Usuario</Label>
-        <Input
-          type="text"
-          id="username"
-          defaultValue={userData?.username || ""}
-          {...register("username")}
-        />
-        {errors.name && (
-          <TinyMdText>{errors.name.message as string}</TinyMdText>
-        )}
-        <Label>Direccion</Label>
-        <Input
-          type="text"
-          id={"address"}
-          defaultValue={userData?.address || ""}
-          {...register("address")}
-        />
-        {errors.address && (
-          <TinyMdText>{errors.address.message as string}</TinyMdText>
-        )}
-        <Label>Telefono</Label>
-        <Input
-          type="tel"
-          id="telephone"
-          pattern="[0-9]{4,15}"
-          defaultValue={userData?.telephone || ""}
-          {...register("telephone")}
-        />
-        {errors.telephone && (
-          <TinyMdText>{errors.telephone.message as string}</TinyMdText>
-        )}
-        <TertiaryButton>Guardar</TertiaryButton>
-      </FormItems>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <FormItems gap={"15px"}>
+          <Subtitle>Perfil</Subtitle>
+          <Label>Usuario</Label>
+          <Input
+            type="text"
+            id="username"
+            defaultValue={userData?.username || ""}
+            {...register("username")}
+          />
+          {errors.name && (
+            <TinyMdText>{errors.name.message as string}</TinyMdText>
+          )}
+          <Label>Direccion</Label>
+          <Input
+            type="text"
+            id={"address"}
+            defaultValue={userData?.address || ""}
+            {...register("address")}
+          />
+          {errors.address && (
+            <TinyMdText>{errors.address.message as string}</TinyMdText>
+          )}
+          <Label>Telefono</Label>
+          <Input
+            type="tel"
+            id="telephone"
+            pattern="[0-9]{4,15}"
+            defaultValue={userData?.telephone || ""}
+            {...register("telephone")}
+          />
+          {errors.telephone && (
+            <TinyMdText>{errors.telephone.message as string}</TinyMdText>
+          )}
+          <TertiaryButton>Guardar</TertiaryButton>
+        </FormItems>
+      )}
     </StyledForm>
   );
 };

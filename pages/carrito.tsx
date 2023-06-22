@@ -1,5 +1,5 @@
 import { Layout } from "components/Layout/Layout";
-import { ShoppingCart } from "components/ShoppingCart";
+import { ShoppingCart } from "components/shopping-cart/ShoppingCart";
 import { PageSection } from "ui/boxes";
 import { Subtitle } from "ui/texts";
 

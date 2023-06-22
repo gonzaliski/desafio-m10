@@ -1,14 +1,13 @@
+import { FavouriteButton } from "components/FavouriteButton";
 import { useMe } from "lib/hooks";
 import Image from "next/image";
 import Router from "next/router";
-import { useState } from "react";
-import { BsHeart, BsHeartFill } from "react-icons/bs";
 import styled from "styled-components";
-import { VerticalBox } from "ui/boxes";
+import { HorizontalBox, VerticalBox } from "ui/boxes";
 import { MdText, MdTextBold } from "ui/texts";
 export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
   const auth = useMe();
-  const [isFavourite, setIsFavourite] = useState(false);
+
   // const handleBuy = async () => {
   //   if (!isUserLogged()) Router.push("/ingresar");
   //   const address = getUserAddress();
@@ -16,27 +15,11 @@ export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
   //   const { url } = await generateOrder(id, address, productData);
   //   Router.push(url);
   // };
-  const handleFavourite = () => {
-    if (!auth) {
-      Router.push("/ingresar");
-    }
-    console.log("me gusta");
-    setIsFavourite(!isFavourite);
-  };
+
   return (
     <CardContainer onClick={() => Router.push("/item/" + id)}>
-      <div
-        className="favourite-container"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleFavourite();
-        }}
-      >
-        {isFavourite ? (
-          <BsHeartFill className="favourite-icon" />
-        ) : (
-          <BsHeart className="favourite-icon" />
-        )}
+      <div className="favourite-container">
+        <FavouriteButton />
       </div>
       {imgUrl && (
         <ImageWrapper>
@@ -55,7 +38,9 @@ export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
         style={{ padding: "15px", maxWidth: "400px" }}
         align="flex-start"
       >
-        <MdText>{title}</MdText>
+        <TitleContainer>
+          <PriceTitle>{title}</PriceTitle>
+        </TitleContainer>
         <MdTextBold>${price}</MdTextBold>
       </VerticalBox>
     </CardContainer>
@@ -92,16 +77,18 @@ const CardContainer = styled.div`
     position: absolute;
     right: 5%;
     top: 5%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    border: 1px solid black;
   }
-  .favourite-icon {
-    font-size: large;
-    fill: currentColor;
-  }
+`;
+const PriceTitle = styled(MdText)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
+  white-space: pre-wrap;
+`;
+const TitleContainer = styled(HorizontalBox)`
+  height: 40px;
+  overflow: hidden;
+  display: inline-block;
+  width: calc(100%);
 `;
