@@ -24,25 +24,31 @@ export const LightSubtitle = styled(Subtitle)`
   color: white;
 `;
 
-export const LargeTextBold = styled.h3`
-  font-size: 20px;
+export const LgTextBold = styled.h3`
   margin: 0;
+  font-size: 20px;
 `;
 
-export const LargeTextThin = styled(LargeTextBold)`
+export const LgTextThin = styled(LgTextBold)`
   font-weight: 400;
 `;
 
-export const MediumText = styled.p`
+export const MdText = styled.p`
   font-size: 16px;
   margin: 0;
 `;
 
-export const MediumTextBold = styled(MediumText)`
+export const MdTextBold = styled(MdText)`
   font-weight: 600;
 `;
 
-export const TinyText = styled(MediumText)`
+export const TinyMdText = styled(MdText)`
+  font-weight: 300;
+`;
+export const SmText = styled(MdText)`
+  font-size: 14px;
+`;
+export const TinySmText = styled(SmText)`
   font-weight: 300;
 `;
 

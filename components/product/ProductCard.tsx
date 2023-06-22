@@ -1,10 +1,14 @@
+import { useMe } from "lib/hooks";
 import Image from "next/image";
 import Router from "next/router";
-import { BsHeart } from "react-icons/bs";
+import { useState } from "react";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import styled from "styled-components";
 import { VerticalBox } from "ui/boxes";
-import { MediumText, MediumTextBold } from "ui/texts";
+import { MdText, MdTextBold } from "ui/texts";
 export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
+  const auth = useMe();
+  const [isFavourite, setIsFavourite] = useState(false);
   // const handleBuy = async () => {
   //   if (!isUserLogged()) Router.push("/ingresar");
   //   const address = getUserAddress();
@@ -12,10 +16,27 @@ export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
   //   const { url } = await generateOrder(id, address, productData);
   //   Router.push(url);
   // };
+  const handleFavourite = () => {
+    if (!auth) {
+      Router.push("/ingresar");
+    }
+    console.log("me gusta");
+    setIsFavourite(!isFavourite);
+  };
   return (
     <CardContainer onClick={() => Router.push("/item/" + id)}>
-      <div className="favourite-container">
-        <BsHeart className="favourite-icon" />
+      <div
+        className="favourite-container"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFavourite();
+        }}
+      >
+        {isFavourite ? (
+          <BsHeartFill className="favourite-icon" />
+        ) : (
+          <BsHeart className="favourite-icon" />
+        )}
       </div>
       {imgUrl && (
         <ImageWrapper>
@@ -34,8 +55,8 @@ export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
         style={{ padding: "15px", maxWidth: "400px" }}
         align="flex-start"
       >
-        <MediumText>{title}</MediumText>
-        <MediumTextBold>${price}</MediumTextBold>
+        <MdText>{title}</MdText>
+        <MdTextBold>${price}</MdTextBold>
       </VerticalBox>
     </CardContainer>
   );
@@ -67,7 +88,7 @@ const CardContainer = styled.div`
     object-fit: "cover";
   }
   .favourite-container {
-    z-index: 900;
+    z-index: 4;
     position: absolute;
     right: 5%;
     top: 5%;
@@ -81,5 +102,6 @@ const CardContainer = styled.div`
   }
   .favourite-icon {
     font-size: large;
+    fill: currentColor;
   }
 `;

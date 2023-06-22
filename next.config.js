@@ -9,7 +9,7 @@ const nextConfig = withSvgr({
     styledComponents: true,
   },
   images: {
-    domains: ["res.cloudinary.com", "images.asos-media.com"],
+    domains: ["res.cloudinary.com", "images.asos-media.com", "www.moov.com.ar"],
   },
 });
 

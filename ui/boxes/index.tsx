@@ -4,27 +4,27 @@ export const PageSection = styled.section<PageSectionProps>`
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: ${(props) => (props.alignCenter ? "center" : "none")};
-  gap: 15px;
+  align-items: ${({ align }) => (align ? align : "initial")};
+  gap: ${({ gap }) => gap || "15px"};
   padding-top: 20px;
   padding-bottom: 20px;
-  justify-content: center;
-  height: ${(props) => (props.sm ? "30vh" : "70vh")};
+  justify-content: ${({ justify }) => justify || "center"};
+  min-height: 70vh;
   width: ${(props) => props.width};
 `;
 
 export const VerticalBox = styled.div<VerticalBoxProps>`
   display: flex;
   flex-direction: column;
-  align-items: ${(props) => (props.align ? props.align : "center")};
-  width: ${(props) => props.width};
-  gap: ${(props) => props.gap};
+  align-items: ${({ align }) => (align ? align : "center")};
+  width: ${({ width }) => width};
+  gap: ${({ gap }) => gap};
 `;
 
-export const HorizontalBox = styled.div<HorizontalBoxProps>`
+export const HorizontalBox = styled.div<FlexProps>`
   display: flex;
   justify-content: space-between;
-  gap: ${(props) => props.gap};
+  gap: ${({ gap }) => gap};
 `;
 
 export const LongSection = styled.section<LongSectionProps>`

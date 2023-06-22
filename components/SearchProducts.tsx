@@ -1,7 +1,7 @@
 import { useProducts } from "lib/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { LargeTextBold } from "ui/texts";
+import { LgTextBold } from "ui/texts";
 import { ProductCard } from "./product/ProductCard";
 
 export const SearchProducts = (props: any) => {
@@ -25,7 +25,7 @@ export const SearchProducts = (props: any) => {
           />
         ))
       ) : (
-        <LargeTextBold>No hay resultados</LargeTextBold>
+        <LgTextBold>No hay resultados</LgTextBold>
       )}
     </>
   );

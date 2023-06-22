@@ -1,16 +1,30 @@
+import { DetailCarousel } from "components/Carousel/DetailCarousel";
+import { useSetRecoilState } from "recoil";
+import { shoppingCartState } from "recoil/atoms";
 import styled from "styled-components";
 import { MainButton } from "ui/buttons";
-import { MediumText, Subtitle, ThinSubtitle } from "ui/texts";
+import { MdText, Subtitle, ThinSubtitle } from "ui/texts";
 import { SizeSelector } from "./SizeSelector";
-import { DetailCarousel } from "components/Carousel/DetailCarousel";
 
 export const ProductCardDetail = ({
   product,
 }: {
   product: ProductCardDetailProps;
 }) => {
+  const setNewItem = useSetRecoilState(shoppingCartState);
   const handleSizeSelection = (size: string) => {
     console.log(size);
+  };
+  const addToCart = () => {
+    setNewItem((prevItems) => [
+      ...prevItems,
+      {
+        id: product.id,
+        image: product.images[0],
+        title: product.title,
+        price: product.price,
+      },
+    ]);
   };
   return (
     <ProductDetail>
@@ -21,9 +35,9 @@ export const ProductCardDetail = ({
         <ThinSubtitle>{product.title}</ThinSubtitle>
         <Subtitle>${product.price}</Subtitle>
         <SizeSelector onChange={handleSizeSelection}></SizeSelector>
-        <MainButton>Agregar al carrito</MainButton>
+        <MainButton onClick={addToCart}>Agregar al carrito</MainButton>
         <ThinSubtitle>Descripcion</ThinSubtitle>
-        <MediumText>{product.description}</MediumText>
+        <MdText>{product.description}</MdText>
       </ProductInformation>
     </ProductDetail>
   );

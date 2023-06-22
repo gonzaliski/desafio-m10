@@ -1,10 +1,20 @@
+type alignProps = "center" | "flex-end" | "flex-start" | "stretch" | "baseline";
+type justifyProps =
+  | "center"
+  | "flex-end"
+  | "flex-start"
+  | "space-around"
+  | "space-between"
+  | "space-evenly";
 type textProps = {
   text: string;
 };
 type PageSectionProps = {
-  sm?: sm;
+  gap?: string;
+  sm?: boolean;
   width?: string;
-  alignCenter?: alignCenter;
+  align?: alignProps;
+  justify?: justifyProps;
 };
 type ProductCardProps = {
   id: string;
@@ -19,22 +29,15 @@ type NavBarLinksProps = {
 type BurgerMenuContainerProps = {
   open?: boolean;
 };
-
-type VerticalBoxProps = {
+type FlexProps = {
   gap?: string;
+  align?: alignProps;
+  justify?: justifyProps;
+};
+
+interface VerticalBoxProps extends FlexProps {
   width?: string;
-  align?:
-    | "center"
-    | "flex-end"
-    | "flex-start"
-    | "space-around"
-    | "space-between"
-    | "space-evenly";
-};
-
-type HorizontalBoxProps = {
-  gap?: string;
-};
+}
 
 type HeadingProps = {
   position?: "right" | "left" | "center";
@@ -79,4 +82,10 @@ type ProductData = {
 
 type SizeSelectorProps = {
   onChange?: (a: string) => void;
+};
+type shoppingCartItem = {
+  id: string;
+  image: string;
+  title: string;
+  price: number;
 };

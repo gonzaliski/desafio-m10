@@ -1,14 +1,13 @@
+import { MainCarousel } from "components/Carousel/MainCarousel";
 import { Layout } from "components/Layout/Layout";
 import FeaturedProducts from "components/bff";
 import { sync } from "lib/api";
-import Image from "next/image";
 import Router from "next/router";
 import { GetServerSideProps } from "next/types";
 import { useEffect } from "react";
-import styled from "styled-components";
-import { LongSection, PageSection, VerticalBox } from "ui/boxes";
-import { DarkHeading, LightHeading } from "ui/texts";
+import { LongSection, VerticalBox } from "ui/boxes";
 import Puma from "../public/puma.jpg";
+import Fila from "../public/fila.jpg";
 
 export default function Home({
   featuredProducts,
@@ -32,38 +31,15 @@ export default function Home({
   }, []);
   return (
     <Layout>
-      <PageSection>
-        <VerticalBox>
-          <CarouselWrapper>
-            <Image src={Puma} alt={"puma"} className="img"></Image>
-          </CarouselWrapper>
-          <LightHeading position={"center"}>El mejor Ecommerce</LightHeading>
-        </VerticalBox>
-      </PageSection>
+      <VerticalBox>
+        <MainCarousel images={[Puma, Fila, Puma]} />
+      </VerticalBox>
       <LongSection color="var(--primary-color)">
         <FeaturedProducts products={featuredProducts}></FeaturedProducts>
       </LongSection>
     </Layout>
   );
 }
-
-const CarouselWrapper = styled.div`
-  position: absolute;
-  overflow: hidden;
-  transform: translateX(-50%);
-  left: 50%;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -3;
-  .img {
-    object-fit: cover;
-    min-width: 100%;
-    min-height: 100%;
-  }
-  @media (min-width: 768px) {
-  }
-`;
 
 export const getServerSideProps: GetServerSideProps<{
   featuredProducts: ProductCardProps;

@@ -1,4 +1,4 @@
-import { ProfileForm } from "components/Forms";
+import { ProfileForm } from "components/forms/ProfileForm";
 import { Layout } from "components/Layout/Layout";
 import { PageSection } from "ui/boxes";
 

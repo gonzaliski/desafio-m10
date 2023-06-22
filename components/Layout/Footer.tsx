@@ -3,7 +3,7 @@ import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
 import { InstagramIcon, TwitterIcon } from "ui/icons";
-import { LargeTextThin, TinyText } from "ui/texts";
+import { LgTextBold, LgTextThin, TinyMdText } from "ui/texts";
 export const Footer = () => {
   const handleLogout = () => {
     logout();
@@ -14,34 +14,34 @@ export const Footer = () => {
     <FooterContainer>
       <FooterContentContainer>
         <ContentBox>
-          <LargeTextThin>Atajos</LargeTextThin>
+          <LgTextBold>Atajos</LgTextBold>
           <Link href={"/ingresar"} passHref legacyBehavior>
-            <TinyText>Ingresar</TinyText>
+            <TinyMdText>Ingresar</TinyMdText>
           </Link>
           <Link href={"/perfil"} passHref legacyBehavior>
-            <TinyText>Mi perfil</TinyText>
+            <TinyMdText>Mi perfil</TinyMdText>
           </Link>
           <Link href={"/"} passHref legacyBehavior>
-            <TinyText>Buscar</TinyText>
+            <TinyMdText>Buscar</TinyMdText>
           </Link>
-          <TinyText onClick={handleLogout}>Logout</TinyText>
+          <TinyMdText onClick={handleLogout}>Logout</TinyMdText>
         </ContentBox>
         <ContentBox>
-          <LargeTextThin>Redes</LargeTextThin>
+          <LgTextBold>Redes</LgTextBold>
           <SocialLink>
             <TwitterIcon></TwitterIcon>
             <Link href={"https://www.twitter.com"} passHref legacyBehavior>
-              <TinyText>Gonzalo Méndez Stefano</TinyText>
+              <TinyMdText>Gonzalo Méndez Stefano</TinyMdText>
             </Link>
           </SocialLink>
           <SocialLink>
             <InstagramIcon></InstagramIcon>
             <Link href={"https://www.instagram.com"} passHref legacyBehavior>
-              <TinyText>Gonzalo Méndez Stefano</TinyText>
+              <TinyMdText>Gonzalo Méndez Stefano</TinyMdText>
             </Link>
           </SocialLink>
         </ContentBox>
-        <TinyText>@{actualYear} apx</TinyText>
+        <TinyMdText>@{actualYear} apx</TinyMdText>
       </FooterContentContainer>
     </FooterContainer>
   );

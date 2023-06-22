@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { MediumText } from "ui/texts";
+import { MdText } from "ui/texts";
 
 export const SizeSelector = ({ onChange }: SizeSelectorProps) => {
   const [selected, setSelected] = useState("");
@@ -44,7 +44,7 @@ export const SizeSelector = ({ onChange }: SizeSelectorProps) => {
   };
   return (
     <SizesContainer>
-      <MediumText>Talles</MediumText>
+      <MdText>Talles</MdText>
       <SizesList>
         {sizes.map((value, index) => (
           <SizeItem

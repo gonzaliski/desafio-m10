@@ -29,6 +29,7 @@ export const SecondaryButton = styled(MainButton)`
 
 export const TertiaryButton = styled(MainButton)`
   background-color: var(--black-main);
+  max-width: 450px;
 `;
 
 export const BorderButton = styled(MainButton)`
