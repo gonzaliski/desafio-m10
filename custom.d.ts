@@ -20,7 +20,7 @@ type ProductCardProps = {
   id: string;
   title: string;
   price: number;
-  imgUrl?: string;
+  imgUrl: string;
 };
 type NavBarLinksProps = {
   active?: boolean;
@@ -88,4 +88,15 @@ type shoppingCartItem = {
   image: string;
   title: string;
   price: number;
+};
+type favouriteItems = {
+  id: string;
+  image: string;
+  title: string;
+  price: number;
+};
+
+type Brand = {
+  name: string;
+  image: string;
 };

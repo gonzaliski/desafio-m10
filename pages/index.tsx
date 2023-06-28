@@ -8,31 +8,24 @@ import { useEffect } from "react";
 import { LongSection, VerticalBox } from "ui/boxes";
 import Puma from "../public/puma.jpg";
 import Fila from "../public/fila.jpg";
+import { BrandsCarousel } from "components/Carousel/BrandsCarousel";
+import { Subtitle } from "ui/texts";
 
 export default function Home({
   featuredProducts,
+  brands,
 }: {
   featuredProducts: ProductCardProps[];
+  brands: Brand[];
 }) {
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const query = e.target.query.value;
-    if (query) Router.push({ pathname: "/search", query: { search: query } });
-  };
-  useEffect(() => {
-    const syncProds = async () => {
-      try {
-        await sync();
-      } catch (e) {
-        console.error("failed to get products");
-      }
-    };
-    syncProds();
-  }, []);
   return (
     <Layout>
       <VerticalBox>
         <MainCarousel images={[Puma, Fila, Puma]} />
+      </VerticalBox>
+      <VerticalBox gap="70px">
+        <Subtitle>Buscá tus marcas favoritas</Subtitle>
+        <BrandsCarousel brands={brands} />
       </VerticalBox>
       <LongSection color="var(--primary-color)">
         <FeaturedProducts products={featuredProducts}></FeaturedProducts>
@@ -50,8 +43,9 @@ export const getServerSideProps: GetServerSideProps<{
   } else {
     url = process.env.PROD_API;
   }
-
-  const res = await fetch(url + "/api/featured-products");
-  const products = await res.json();
-  return { props: { featuredProducts: products } };
+  const brandsRes = await fetch(url + "/api/media");
+  const productRes = await fetch(url + "/api/featured-products");
+  const products = await productRes.json();
+  const brands = await brandsRes.json();
+  return { props: { featuredProducts: products, brands } };
 };

@@ -59,7 +59,7 @@ export const NavBar = () => {
             <Link href={"/carrito"} passHref legacyBehavior>
               <BsCart className="icon"></BsCart>
             </Link>
-            <Link href={"/carrito"} passHref legacyBehavior>
+            <Link href={"/favoritos"} passHref legacyBehavior>
               <BsHeart className="icon"></BsHeart>
             </Link>
           </HorizontalBox>
@@ -94,7 +94,7 @@ const NavLinks = ({
     },
     {
       icon: <BsHeart className="icon"></BsHeart>,
-      path: "/favourites",
+      path: "/favoritos",
       text: "Mis Favoritos",
     },
     {

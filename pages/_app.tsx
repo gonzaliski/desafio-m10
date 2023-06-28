@@ -4,7 +4,7 @@ import { RecoilRoot } from "recoil";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </RecoilRoot>
   );
 }

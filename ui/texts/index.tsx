@@ -26,7 +26,10 @@ export const LightSubtitle = styled(Subtitle)`
 
 export const LgTextBold = styled.h3`
   margin: 0;
-  font-size: 20px;
+  font-size: 16px;
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 export const LgTextThin = styled(LgTextBold)`
@@ -34,8 +37,11 @@ export const LgTextThin = styled(LgTextBold)`
 `;
 
 export const MdText = styled.p`
-  font-size: 16px;
+  font-size: 12px;
   margin: 0;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 export const MdTextBold = styled(MdText)`

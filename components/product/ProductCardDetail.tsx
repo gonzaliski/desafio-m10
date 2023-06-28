@@ -1,15 +1,16 @@
 import { DetailCarousel } from "components/Carousel/DetailCarousel";
 import { FavouriteButton } from "components/FavouriteButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { shoppingCartState } from "recoil/atoms";
 import styled from "styled-components";
 import { HorizontalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
 import { MdText, Subtitle, ThinSubtitle } from "ui/texts";
 import { SizeSelector } from "./SizeSelector";
+import { findProductById } from "utils";
 
 export const ProductCardDetail = ({
   product,
@@ -17,6 +18,8 @@ export const ProductCardDetail = ({
   product: ProductCardDetailProps;
 }) => {
   const [selectedSize, setSelectedSize] = useState("");
+  const [inShoppingCart, setInShoppingCart] = useState(false);
+  const shoppingCartItems = useRecoilValue(shoppingCartState);
   const setNewItem = useSetRecoilState(shoppingCartState);
   const handleSizeSelection = (size: string) => {
     setSelectedSize(size);
@@ -41,6 +44,13 @@ export const ProductCardDetail = ({
       theme: "light",
     });
   };
+  useEffect(() => {
+    if (findProductById(shoppingCartItems, product.id)) {
+      setInShoppingCart(true);
+    } else {
+      setInShoppingCart(false);
+    }
+  }, [shoppingCartItems]);
   return (
     <ProductDetail>
       <DetailCarousel images={product.images}></DetailCarousel>
@@ -49,11 +59,21 @@ export const ProductCardDetail = ({
         <Subtitle>${product.price}</Subtitle>
         <SizeSelector onChange={handleSizeSelection}></SizeSelector>
         <HorizontalBox gap="20px">
-          <MainButton onClick={addToCart} disabled={selectedSize == ""}>
+          <MainButton
+            onClick={addToCart}
+            disabled={selectedSize == "" || inShoppingCart}
+          >
             Agregar al carrito
           </MainButton>
           <ToastContainer />
-          <FavouriteButton />
+          <FavouriteButton
+            product={{
+              id: product.id,
+              image: product.images[0],
+              title: product.title,
+              price: product.price,
+            }}
+          />
         </HorizontalBox>
         <ThinSubtitle>Descripcion</ThinSubtitle>
         <MdText>{product.description}</MdText>

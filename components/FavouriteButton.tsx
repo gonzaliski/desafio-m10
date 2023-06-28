@@ -2,33 +2,64 @@ import { useMe } from "lib/hooks";
 import Router from "next/router";
 import { useState } from "react";
 import { BsHeartFill, BsHeart } from "react-icons/bs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSetRecoilState } from "recoil";
+import { favouriteItemsState } from "recoil/atoms";
 import styled from "styled-components";
 
-export const FavouriteButton = () => {
+export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
+  const setNewFavourite = useSetRecoilState(favouriteItemsState);
   const auth = useMe();
 
   const [isFavourite, setIsFavourite] = useState(false);
   const handleFavourite = () => {
+    let shouldShowSuccess = !isFavourite;
     if (!auth) {
       Router.push("/ingresar");
     }
-    console.log("me gusta");
+    if (!shouldShowSuccess) {
+      toast.info("Producto eliminado de favoritos", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+    setNewFavourite((prev) => [...prev, product]);
     setIsFavourite(!isFavourite);
+    toast.success("Producto agregado a favoritos", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "light",
+    });
   };
   return (
-    <FavouriteContainer
-      className="favourite-container"
-      onClick={(e) => {
-        e.stopPropagation();
-        handleFavourite();
-      }}
-    >
-      {isFavourite ? (
-        <BsHeartFill className="favourite-icon" />
-      ) : (
-        <BsHeart className="favourite-icon" />
-      )}
-    </FavouriteContainer>
+    <>
+      <ToastContainer />
+      <FavouriteContainer
+        className="favourite-container"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleFavourite();
+        }}
+      >
+        {isFavourite ? (
+          <BsHeartFill className="favourite-icon" />
+        ) : (
+          <BsHeart className="favourite-icon" />
+        )}
+      </FavouriteContainer>
+    </>
   );
 };
 const FavouriteContainer = styled.div`
