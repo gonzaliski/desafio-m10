@@ -1,27 +1,24 @@
+import { BrandsCarousel } from "components/Carousel/BrandsCarousel";
 import { MainCarousel } from "components/Carousel/MainCarousel";
 import { Layout } from "components/Layout/Layout";
 import FeaturedProducts from "components/bff";
-import { sync } from "lib/api";
-import Router from "next/router";
 import { GetServerSideProps } from "next/types";
-import { useEffect } from "react";
 import { LongSection, VerticalBox } from "ui/boxes";
-import Puma from "../public/puma.jpg";
-import Fila from "../public/fila.jpg";
-import { BrandsCarousel } from "components/Carousel/BrandsCarousel";
 import { Subtitle } from "ui/texts";
 
 export default function Home({
   featuredProducts,
   brands,
+  banners,
 }: {
   featuredProducts: ProductCardProps[];
   brands: Brand[];
+  banners: Banner[];
 }) {
   return (
     <Layout>
       <VerticalBox>
-        <MainCarousel images={[Puma, Fila, Puma]} />
+        <MainCarousel images={banners} />
       </VerticalBox>
       <VerticalBox gap="70px">
         <Subtitle>Buscá tus marcas favoritas</Subtitle>
@@ -43,9 +40,11 @@ export const getServerSideProps: GetServerSideProps<{
   } else {
     url = process.env.PROD_API;
   }
-  const brandsRes = await fetch(url + "/api/media");
+  const brandsRes = await fetch(url + "/api/brands");
+  const bannersRes = await fetch(url + "/api/banners");
   const productRes = await fetch(url + "/api/featured-products");
-  const products = await productRes.json();
+  const featuredProducts = await productRes.json();
   const brands = await brandsRes.json();
-  return { props: { featuredProducts: products, brands } };
+  const banners = await bannersRes.json();
+  return { props: { featuredProducts, brands, banners } };
 };

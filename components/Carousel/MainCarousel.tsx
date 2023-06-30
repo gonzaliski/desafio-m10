@@ -1,8 +1,15 @@
+import { useMediaQuery } from "hooks";
+import Image from "next/image";
+import Router from "next/router";
 import Carousel from "nuka-carousel";
 import styled from "styled-components";
-import Image from "next/image";
 
-export const MainCarousel = ({ images }: { images: any[] }) => {
+export const MainCarousel = ({ images }: { images: Banner[] }) => {
+  const isMdScreen = useMediaQuery(550);
+  let imageSize = {
+    height: isMdScreen ? 540 : 300,
+    width: isMdScreen ? 1900 : 300,
+  };
   return (
     <CarouselWrapper>
       <Carousel
@@ -23,11 +30,15 @@ export const MainCarousel = ({ images }: { images: any[] }) => {
       >
         {images?.map((r: any) => (
           <Image
-            src={r || ""}
+            key={r.id}
+            src={(isMdScreen ? r.desktop : r.mobile) || ""}
             alt={"imagen"}
-            height={540}
-            width={1900}
+            height={imageSize.height}
+            width={imageSize.width}
             className="slider__img"
+            onClick={() =>
+              Router.push({ pathname: "/search", query: { search: r.query } })
+            }
             priority
           ></Image>
         ))}
@@ -42,10 +53,17 @@ const CarouselWrapper = styled.div`
   width: 100%;
   height: auto;
   .slider__img {
-    object-fit: cover;
+    cursor: pointer;
+    object-fit: scale-down;
     object-position: top;
     margin-bottom: 35px;
     width: 100%;
+    height: 100%;
+  }
+  @media (min-width: 350px) {
+    .slider__img {
+      object-fit: cover;
+    }
   }
 
   .carousel {

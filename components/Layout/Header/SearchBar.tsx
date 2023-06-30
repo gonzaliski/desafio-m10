@@ -20,6 +20,8 @@ export const SearchBar = () => {
   };
   useEffect(() => {
     const { search } = router.query;
+    console.log(search);
+
     setQueryValue(search as string);
   }, [router.query]);
   return (

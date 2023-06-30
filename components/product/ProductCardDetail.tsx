@@ -53,10 +53,10 @@ export const ProductCardDetail = ({
   }, [shoppingCartItems]);
   return (
     <ProductDetail>
-      <DetailCarousel images={product.images}></DetailCarousel>
+      <DetailCarousel images={product?.images}></DetailCarousel>
       <ProductInformation>
-        <ThinSubtitle>{product.title}</ThinSubtitle>
-        <Subtitle>${product.price}</Subtitle>
+        <ThinSubtitle>{product?.title}</ThinSubtitle>
+        <Subtitle>${product?.price}</Subtitle>
         <SizeSelector onChange={handleSizeSelection}></SizeSelector>
         <HorizontalBox gap="20px">
           <MainButton
@@ -68,15 +68,15 @@ export const ProductCardDetail = ({
           <ToastContainer />
           <FavouriteButton
             product={{
-              id: product.id,
-              image: product.images[0],
-              title: product.title,
-              price: product.price,
+              id: product?.id,
+              image: product?.images[0],
+              title: product?.title,
+              price: product?.price,
             }}
           />
         </HorizontalBox>
         <ThinSubtitle>Descripcion</ThinSubtitle>
-        <MdText>{product.description}</MdText>
+        <MdText>{product?.description}</MdText>
       </ProductInformation>
     </ProductDetail>
   );

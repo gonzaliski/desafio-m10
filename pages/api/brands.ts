@@ -8,6 +8,6 @@ export default async function (req: any, res: any) {
 
 function processData(data: any) {
   return data.includes["Asset"].map((i: { fields: any }) => {
-    return { name: i.fields.title, image: "https://" + i.fields.file.url };
+    return { name: i.fields.title, image: "https:" + i.fields.file.url };
   });
 }

@@ -18,6 +18,7 @@ export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
     if (!auth) {
       Router.push("/ingresar");
     }
+    setIsFavourite(!isFavourite);
     if (!shouldShowSuccess) {
       toast.info("Producto eliminado de favoritos", {
         position: "top-right",
@@ -32,7 +33,6 @@ export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
       return;
     }
     setNewFavourite((prev) => [...prev, product]);
-    setIsFavourite(!isFavourite);
     toast.success("Producto agregado a favoritos", {
       position: "top-right",
       autoClose: 3000,

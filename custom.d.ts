@@ -100,3 +100,9 @@ type Brand = {
   name: string;
   image: string;
 };
+type Banner = {
+  id: string;
+  query: string;
+  desktop: string;
+  mobile: string;
+};

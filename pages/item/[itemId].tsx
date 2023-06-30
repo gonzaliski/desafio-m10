@@ -2,7 +2,7 @@ import { Layout } from "components/Layout/Layout";
 import { ProductCardDetail } from "components/product/ProductCardDetail";
 import { getAllProductIDs, getProductByID } from "lib/api";
 import { GetStaticPropsContext } from "next";
-import { LongSection, PageSection } from "ui/boxes";
+import { LongSection } from "ui/boxes";
 
 export default function Item({ product }: { product: ProductCardDetailProps }) {
   return (
