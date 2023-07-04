@@ -2,11 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Footer } from "./Footer";
 import { NavBar } from "./Header/navbar/NavBar";
+import { ShortCuts } from "./Header/ShortCuts";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <PageWrapper>
-      <NavBar />
+      <div>
+        <NavBar />
+        <ShortCuts />
+      </div>
+
       {children}
       <Footer />
     </PageWrapper>

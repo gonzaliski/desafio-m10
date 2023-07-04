@@ -1,21 +1,17 @@
 import { FavouriteButton } from "components/FavouriteButton";
-import { useMe } from "lib/hooks";
 import Image from "next/image";
 import Router from "next/router";
 import styled from "styled-components";
 import { HorizontalBox, VerticalBox } from "ui/boxes";
-import { MdText, MdTextBold } from "ui/texts";
-export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
-  const auth = useMe();
-
-  // const handleBuy = async () => {
-  //   if (!isUserLogged()) Router.push("/ingresar");
-  //   const address = getUserAddress();
-  //   const productData = { title, desc, price, imgUrl };
-  //   const { url } = await generateOrder(id, address, productData);
-  //   Router.push(url);
-  // };
-
+import { MdText, MdTextBold, SmText } from "ui/texts";
+import { Stock } from "./Stock";
+export const ProductCard = ({
+  id,
+  title,
+  price,
+  imgUrl,
+  stock,
+}: ProductCardProps) => {
   return (
     <CardContainer onClick={() => Router.push("/item/" + id)}>
       <div className="favourite-container">
@@ -42,6 +38,7 @@ export const ProductCard = ({ id, title, price, imgUrl }: ProductCardProps) => {
           <PriceTitle>{title}</PriceTitle>
         </TitleContainer>
         <MdTextBold>${price}</MdTextBold>
+        <Stock available={stock} />
       </VerticalBox>
     </CardContainer>
   );

@@ -21,7 +21,7 @@ export default function Home({
         <MainCarousel images={banners} />
       </VerticalBox>
       <VerticalBox gap="70px">
-        <Subtitle>Buscá tus marcas favoritas</Subtitle>
+        <Subtitle align="center">Buscá tus marcas favoritas</Subtitle>
         <BrandsCarousel brands={brands} />
       </VerticalBox>
       <LongSection color="var(--primary-color)">

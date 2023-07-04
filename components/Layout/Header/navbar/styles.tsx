@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { LgTextBold, MainLink } from "ui/texts";
 
 export const DesktopOnly = styled.div`
+  position: relative;
   .icon {
     cursor: pointer;
     font-size: x-large;

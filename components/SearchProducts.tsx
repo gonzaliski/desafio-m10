@@ -21,6 +21,7 @@ export const SearchProducts = (props: any) => {
             title={p.title}
             price={p.price}
             imgUrl={p.imageUrl}
+            stock={p.stock}
           />
         ))
       ) : (

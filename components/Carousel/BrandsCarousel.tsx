@@ -65,20 +65,26 @@ const CarouselWrapper = styled.div`
   .slider__img {
     object-fit: contain;
     width: 100%;
+    max-height: 100px;
+    max-width: 100px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 550px) {
     .slider__img {
-      max-height: 100px;
-      max-width: 100px;
+      max-height: 130px;
+      max-width: 130px;
     }
   }
 
   .slider-container {
-    padding: 0 3% 0 3%;
-
-    width: 70%;
+    padding: 0 7% 0 7%;
+    width: 90%;
     min-width: 200px;
+  }
+  @media (min-width: 768px) {
+    .slider-container {
+      width: 70%;
+    }
   }
   .slide {
     width: auto !important;

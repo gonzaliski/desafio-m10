@@ -20,35 +20,39 @@ export const Favourites = () => {
   };
   return (
     <VerticalBox gap="20px">
-      {favouriteItems.map((item) => (
-        <FavouriteItem gap="10px">
-          <Image
-            src={item.image}
-            alt={"product-image"}
-            width={100}
-            height={100}
-          ></Image>
-          <ProductDetailFavourite
-            align="flex-start"
-            gap="10px"
-            onClick={() => Router.push("/items/" + item.id)}
-          >
-            <LgTextThin>{item.title}</LgTextThin>
-            <MdText>Cantidad: 1</MdText>
-            <SmText>talle:42</SmText>
-          </ProductDetailFavourite>
-          <ProductPriceFavourite>
-            <MdDelete
-              className="icon"
-              onClick={() => handleDelete(item)}
-            ></MdDelete>
-            <div>
-              <MdText>Total</MdText>
-              <LgTextBold>{"$" + item.price}</LgTextBold>
-            </div>
-          </ProductPriceFavourite>
-        </FavouriteItem>
-      ))}
+      {favouriteItems.length == 0 ? (
+        <MdText>No has agregado productos a favoritos</MdText>
+      ) : (
+        favouriteItems.map((item) => (
+          <FavouriteItem gap="10px">
+            <Image
+              src={item.image}
+              alt={"product-image"}
+              width={100}
+              height={100}
+            ></Image>
+            <ProductDetailFavourite
+              align="flex-start"
+              gap="10px"
+              onClick={() => Router.push("/items/" + item.id)}
+            >
+              <LgTextThin>{item.title}</LgTextThin>
+              <MdText>Cantidad: 1</MdText>
+              <SmText>talle:42</SmText>
+            </ProductDetailFavourite>
+            <ProductPriceFavourite>
+              <MdDelete
+                className="icon"
+                onClick={() => handleDelete(item)}
+              ></MdDelete>
+              <div>
+                <MdText>Total</MdText>
+                <LgTextBold>{"$" + item.price}</LgTextBold>
+              </div>
+            </ProductPriceFavourite>
+          </FavouriteItem>
+        ))
+      )}
     </VerticalBox>
   );
 };

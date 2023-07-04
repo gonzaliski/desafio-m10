@@ -18,6 +18,7 @@ export default function FeaturedProducts({
               title={p?.title}
               price={p?.price}
               imgUrl={p?.imageUrl}
+              stock={p?.stock}
             />
           );
         })}

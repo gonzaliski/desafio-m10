@@ -29,6 +29,7 @@ export const NavBar = () => {
   const handleClick = (state: boolean) => {
     setShowContent(state);
   };
+
   useEffect(() => {
     setUserLoggedIn(isUserLogged());
   }, []);
@@ -56,11 +57,11 @@ export const NavBar = () => {
                 <BsPerson className="icon"></BsPerson>
               </Link>
             )}
-            <Link href={"/carrito"} passHref legacyBehavior>
-              <BsCart className="icon"></BsCart>
-            </Link>
             <Link href={"/favoritos"} passHref legacyBehavior>
               <BsHeart className="icon"></BsHeart>
+            </Link>
+            <Link href={"/carrito"} passHref legacyBehavior>
+              <BsCart className="icon"></BsCart>
             </Link>
           </HorizontalBox>
         </DesktopOnly>

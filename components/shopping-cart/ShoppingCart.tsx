@@ -15,6 +15,9 @@ import {
   ProductPrice,
   ShoppingCartContainer,
 } from "./styles";
+import { getUserAddress, isUserLogged } from "lib";
+import Router from "next/router";
+import { generateOrder } from "lib/api";
 
 export const ShoppingCart = () => {
   const shoppingCartItems = useRecoilValue(shoppingCartState);
@@ -23,6 +26,12 @@ export const ShoppingCart = () => {
     (accum, curr) => accum + curr.price,
     0
   );
+  const handleBuy = async () => {
+    if (!isUserLogged()) Router.push("/ingresar");
+    const address = getUserAddress();
+    const { url } = await generateOrder(address, shoppingCartItems);
+    Router.push(url);
+  };
   return (
     <>
       <MdText>{shoppingCartItems.length} productos</MdText>
@@ -38,7 +47,7 @@ export const ShoppingCart = () => {
           </VerticalBox>
           <VerticalBox gap="20px">
             <CartInformation total={totalPrice}></CartInformation>
-            <MainButton>COMPRAR</MainButton>
+            <MainButton onClick={handleBuy}>COMPRAR</MainButton>
           </VerticalBox>
         </ShoppingCartContainer>
       ) : (
@@ -83,7 +92,7 @@ const ShoppingCartItem = ({ product }: { product: shoppingCartItem }) => {
   return (
     <ItemContainer>
       <Image
-        src={product.image}
+        src={product.imgUrl}
         alt={"product-image"}
         width={100}
         height={100}

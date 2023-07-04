@@ -78,13 +78,12 @@ export async function updateAddress(address: string) {
 }
 
 export async function generateOrder(
-  productId: string,
   address: string,
-  productData: ProductData
+  products: shoppingCartItem[]
 ) {
   console.log(address);
 
-  return await fetchAPI(`/order?productId=${productId}`, {
+  return await fetchAPI(`/order`, {
     method: "POST",
     mode: "cors",
     headers: {
@@ -92,7 +91,7 @@ export async function generateOrder(
     },
     body: JSON.stringify({
       envio: address,
-      productData,
+      products,
     }),
   });
 }

@@ -21,7 +21,7 @@ export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
     setIsFavourite(!isFavourite);
     if (!shouldShowSuccess) {
       toast.info("Producto eliminado de favoritos", {
-        position: "top-right",
+        position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: true,
         closeOnClick: true,
@@ -34,7 +34,7 @@ export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
     }
     setNewFavourite((prev) => [...prev, product]);
     toast.success("Producto agregado a favoritos", {
-      position: "top-right",
+      position: "bottom-right",
       autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,

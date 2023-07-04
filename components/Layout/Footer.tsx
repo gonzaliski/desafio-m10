@@ -16,15 +16,17 @@ export const Footer = () => {
         <ContentBox>
           <LgTextBold>Atajos</LgTextBold>
           <Link href={"/ingresar"} passHref legacyBehavior>
-            <TinyMdText>Ingresar</TinyMdText>
+            <TinyMdText className="link">Ingresar</TinyMdText>
           </Link>
           <Link href={"/perfil"} passHref legacyBehavior>
-            <TinyMdText>Mi perfil</TinyMdText>
+            <TinyMdText className="link">Mi perfil</TinyMdText>
           </Link>
           <Link href={"/"} passHref legacyBehavior>
-            <TinyMdText>Buscar</TinyMdText>
+            <TinyMdText className="link">Buscar</TinyMdText>
           </Link>
-          <TinyMdText onClick={handleLogout}>Logout</TinyMdText>
+          <TinyMdText onClick={handleLogout} className="link">
+            Logout
+          </TinyMdText>
         </ContentBox>
         <ContentBox>
           <LgTextBold>Redes</LgTextBold>
@@ -71,9 +73,13 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  .link {
+    cursor: pointer;
+  }
 `;
 
 const SocialLink = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 5px;

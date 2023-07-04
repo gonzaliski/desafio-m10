@@ -2,20 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { MdText } from "ui/texts";
 
-export const SizeSelector = ({ onChange }: SizeSelectorProps) => {
+export const SizeSelector = ({ onChange, available }: SizeSelectorProps) => {
   const [selected, setSelected] = useState("");
-  const sizesAvaiable = [
-    "40",
-    "40.5",
-    "41",
-    "41.5",
-    "42",
-    "42.5",
-    "43",
-    "43.5",
-    "44",
-    "44.5",
-  ];
+  console.log(available);
+
   const sizes = [
     "37",
     "37.5",
@@ -48,7 +38,7 @@ export const SizeSelector = ({ onChange }: SizeSelectorProps) => {
       <SizesList>
         {sizes.map((value, index) => (
           <SizeItem
-            disabled={!sizesAvaiable.includes(value)}
+            disabled={!available?.includes(value)}
             onClick={() => handleChange(value)}
             active={value == selected}
             key={index}

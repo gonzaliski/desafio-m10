@@ -23,6 +23,7 @@ export const VerticalBox = styled.div<VerticalBoxProps>`
 
 export const HorizontalBox = styled.div<FlexProps>`
   display: flex;
+  align-items: ${({ align }) => (align ? align : "center")};
   justify-content: space-between;
   gap: ${({ gap }) => gap};
 `;

@@ -11,6 +11,7 @@ import { MainButton } from "ui/buttons";
 import { MdText, Subtitle, ThinSubtitle } from "ui/texts";
 import { SizeSelector } from "./SizeSelector";
 import { findProductById } from "utils";
+import { Stock } from "./Stock";
 
 export const ProductCardDetail = ({
   product,
@@ -29,7 +30,8 @@ export const ProductCardDetail = ({
       ...prevItems,
       {
         id: product.id,
-        image: product.images[0],
+        imgUrl: product.images[0],
+        size: selectedSize,
         title: product.title,
         price: product.price,
       },
@@ -56,12 +58,16 @@ export const ProductCardDetail = ({
       <DetailCarousel images={product?.images}></DetailCarousel>
       <ProductInformation>
         <ThinSubtitle>{product?.title}</ThinSubtitle>
+        <Stock available={product?.stock} />
         <Subtitle>${product?.price}</Subtitle>
-        <SizeSelector onChange={handleSizeSelection}></SizeSelector>
+        <SizeSelector
+          onChange={handleSizeSelection}
+          available={product?.sizesAvailable}
+        ></SizeSelector>
         <HorizontalBox gap="20px">
           <MainButton
             onClick={addToCart}
-            disabled={selectedSize == "" || inShoppingCart}
+            disabled={!product?.stock || selectedSize == "" || inShoppingCart}
           >
             Agregar al carrito
           </MainButton>
@@ -111,11 +117,6 @@ const ProductDetail = styled.div`
     max-width: 65%;
   }
 `;
-// const CarouselWrapper = styled.div`
-//   display: flex;
-//   place-content: center;
-//   width: 100%;
-// `;
 
 const ProductInformation = styled.div`
   flex: 0 1 auto;

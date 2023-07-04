@@ -11,7 +11,8 @@ export const LightHeading = styled(DarkHeading)`
   color: white;
 `;
 
-export const Subtitle = styled.h2`
+export const Subtitle = styled.h2<{ align: string }>`
+  text-align: ${({ align }) => align || "initial"};
   color: var(--black-main);
   margin: 0;
 `;
@@ -48,6 +49,10 @@ export const MdTextBold = styled(MdText)`
   font-weight: 600;
 `;
 
+export const MdTextSuperBold = styled(MdTextBold)`
+  font-weight: 800;
+`;
+
 export const TinyMdText = styled(MdText)`
   font-weight: 300;
 `;
@@ -56,6 +61,12 @@ export const SmText = styled(MdText)`
 `;
 export const TinySmText = styled(SmText)`
   font-weight: 300;
+`;
+export const XSmText = styled(SmText)`
+  font-size: 12px;
+`;
+export const XSmTextBold = styled(XSmText)`
+  font-weight: 600;
 `;
 
 export const Label = styled.label`

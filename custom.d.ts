@@ -21,6 +21,7 @@ type ProductCardProps = {
   title: string;
   price: number;
   imgUrl: string;
+  stock: boolean;
 };
 type NavBarLinksProps = {
   active?: boolean;
@@ -66,7 +67,9 @@ type ProductCardDetailProps = {
   title: string;
   description: string;
   price: number;
+  sizesAvailable: string[];
   images: string[];
+  stock: boolean;
 };
 
 type SessionInfoProps = {
@@ -82,10 +85,12 @@ type ProductData = {
 
 type SizeSelectorProps = {
   onChange?: (a: string) => void;
+  available: string[];
 };
 type shoppingCartItem = {
   id: string;
-  image: string;
+  imgUrl: string;
+  size: string;
   title: string;
   price: number;
 };
