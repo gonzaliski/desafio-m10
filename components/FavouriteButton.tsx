@@ -1,24 +1,27 @@
+import { deleteFavourite, setNewFavourite } from "lib/api";
 import { useMe } from "lib/hooks";
 import Router from "next/router";
-import { useState } from "react";
-import { BsHeartFill, BsHeart } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { favouriteItemsState } from "recoil/atoms";
 import styled from "styled-components";
 
 export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
-  const setNewFavourite = useSetRecoilState(favouriteItemsState);
+  const [favourites, setFavourite] = useRecoilState(favouriteItemsState);
+  // const setFavourite = useSetRecoilValue(favouriteItemsStateUpdated);
   const auth = useMe();
 
   const [isFavourite, setIsFavourite] = useState(false);
-  const handleFavourite = () => {
+  const handleFavourite = async () => {
     let shouldShowSuccess = !isFavourite;
     if (!auth) {
       Router.push("/ingresar");
     }
     setIsFavourite(!isFavourite);
+    //elimina de favoritos
     if (!shouldShowSuccess) {
       toast.info("Producto eliminado de favoritos", {
         position: "bottom-right",
@@ -30,9 +33,16 @@ export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
         progress: undefined,
         theme: "light",
       });
+      await deleteFavourite(product.id);
+
+      // setFavourite(
+      //   favourites.filter((fav: favouriteItems) => fav.id !== product.id)
+      // );
       return;
     }
-    setNewFavourite((prev) => [...prev, product]);
+
+    await setNewFavourite(product);
+    // setFavourite(product);
     toast.success("Producto agregado a favoritos", {
       position: "bottom-right",
       autoClose: 3000,
@@ -43,6 +53,18 @@ export const FavouriteButton = ({ product }: { product: favouriteItems }) => {
       theme: "light",
     });
   };
+  // const isAlreadyFav = favourites.find(
+  //   (f: favouriteItems) => f.id == product.id
+  // );
+
+  useEffect(() => {
+    if (product.isAlreadyFavourite) {
+      setIsFavourite(true);
+    }
+    // if (isUserLogged() && isAlreadyFav) {
+    //   setIsFavourite(true);
+    // }
+  }, [product.isAlreadyFavourite]);
   return (
     <>
       <ToastContainer />

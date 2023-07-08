@@ -9,18 +9,21 @@ export const ProductCard = ({
   id,
   title,
   price,
-  imgUrl,
+  imageUrl,
   stock,
+  isAlreadyFavourite,
 }: ProductCardProps) => {
   return (
     <CardContainer onClick={() => Router.push("/item/" + id)}>
       <div className="favourite-container">
-        <FavouriteButton product={{ id, image: imgUrl, title, price }} />
+        <FavouriteButton
+          product={{ id, image: imageUrl, title, price, isAlreadyFavourite }}
+        />
       </div>
-      {imgUrl && (
+      {imageUrl && (
         <ImageWrapper>
           <Image
-            src={imgUrl || ""}
+            src={imageUrl || ""}
             alt={"imagen"}
             height={250}
             width={250}

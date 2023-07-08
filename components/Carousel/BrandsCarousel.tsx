@@ -42,8 +42,9 @@ export const BrandsCarousel = ({ brands }: { brands: Brand[] }) => {
           </button>
         )}
       >
-        {brands.map((r: any) => (
+        {brands.map((r: any, i) => (
           <Image
+            key={i}
             src={r.image || ""}
             alt={"imagen"}
             height={500}

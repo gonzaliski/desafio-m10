@@ -1,4 +1,4 @@
-import { useMediaQuery } from "hooks";
+import { useMediaQuery } from "hooks/useMediaQuery";
 import Image from "next/image";
 import Router from "next/router";
 import Carousel from "nuka-carousel";

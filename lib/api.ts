@@ -121,3 +121,35 @@ export async function getProductByID(productId: string) {
     },
   });
 }
+
+export async function getFavourites() {
+  return await fetchAPI("/me/favourites", {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+
+export async function setNewFavourite(product: favouriteItems) {
+  return await fetchAPI("/me/favourites", {
+    method: "PATCH",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      product,
+    }),
+  });
+}
+
+export async function deleteFavourite(itemId: string) {
+  return await fetchAPI("/me/favourites?productId=" + itemId, {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}

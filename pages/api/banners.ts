@@ -19,7 +19,6 @@ function processData(data: any) {
     const desktopImageId = item.fields.desktop.sys.id;
     const mobileImageId = item.fields.mobile.sys.id;
     const query = item.fields.query;
-    console.log(query);
 
     // Buscar las imágenes correspondientes en el includes
     const desktopImage = data.includes.Asset.find(

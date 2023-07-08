@@ -20,8 +20,9 @@ type ProductCardProps = {
   id: string;
   title: string;
   price: number;
-  imgUrl: string;
+  imageUrl: string;
   stock: boolean;
+  isAlreadyFavourite: boolean;
 };
 type NavBarLinksProps = {
   active?: boolean;
@@ -36,9 +37,9 @@ type FlexProps = {
   justify?: justifyProps;
 };
 
-interface VerticalBoxProps extends FlexProps {
+type VerticalBoxProps = FlexProps & {
   width?: string;
-}
+};
 
 type HeadingProps = {
   position?: "right" | "left" | "center";
@@ -77,10 +78,11 @@ type SessionInfoProps = {
 };
 
 type ProductData = {
+  id: string;
   title: string;
-  desc: string;
   price: number;
-  imgUrl?: string;
+  imageUrl: string;
+  stock: boolean;
 };
 
 type SizeSelectorProps = {
@@ -99,6 +101,7 @@ type favouriteItems = {
   image: string;
   title: string;
   price: number;
+  isAlreadyFavourite: boolean;
 };
 
 type Brand = {

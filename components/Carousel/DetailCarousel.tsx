@@ -34,8 +34,9 @@ export const DetailCarousel = ({ images }: { images: string[] }) => {
           </button>
         )}
       >
-        {images?.map((r: any) => (
+        {images?.map((r: any, i) => (
           <Image
+            key={i}
             src={r || ""}
             alt={"imagen"}
             height={400}

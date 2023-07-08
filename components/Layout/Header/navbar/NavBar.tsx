@@ -111,8 +111,8 @@ const NavLinks = ({
   ];
   return (
     <NavBarLinks active={showContent}>
-      {linksData.map((link) => (
-        <li>
+      {linksData.map((link, i) => (
+        <li key={i}>
           {link.icon}
           <Link href={link.path} passHref legacyBehavior>
             <LgTextBold>{link.text}</LgTextBold>
