@@ -1,19 +1,51 @@
+import { SortFilter } from "components/Filters/SortFilter";
 import { Layout } from "components/Layout/Layout";
 import { SearchProducts } from "components/SearchProducts";
 import { useState } from "react";
-import { LongSection } from "ui/boxes";
-import { LgTextThin, Subtitle } from "ui/texts";
+import styled from "styled-components";
+import { VerticalBox, LongSection } from "ui/boxes";
+import { MdTextBold, SmText } from "ui/texts";
 export default function Search() {
   const [resultsQuantity, setResultsQuantity] = useState(0);
   return (
     <Layout>
+      <ResultsContainer>
+        <MdTextBold>Resultados</MdTextBold>
+        <SmText>{resultsQuantity} resultados </SmText>
+      </ResultsContainer>
       <LongSection>
-        <Subtitle>Resultados</Subtitle>
-        <LgTextThin>{resultsQuantity} resultados </LgTextThin>
-        <div className="featured__list-container">
+        <SearchLayout>
+          {resultsQuantity !== 0 && (
+            <FiltersContainer>
+              <SortFilter />
+            </FiltersContainer>
+          )}
           <SearchProducts count={setResultsQuantity} />
-        </div>
+        </SearchLayout>
       </LongSection>
     </Layout>
   );
 }
+
+const ResultsContainer = styled(VerticalBox)`
+  align-self: center;
+  margin-top: 20px;
+  width: min-content;
+`;
+
+const SearchLayout = styled(VerticalBox)`
+  width: 100%;
+  gap: 5rem;
+  @media (min-width: 800px) {
+    gap: 2rem;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .search {
+  }
+`;
+
+const FiltersContainer = styled(VerticalBox)`
+  flex: 1 1 40;
+`;

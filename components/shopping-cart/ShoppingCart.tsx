@@ -1,7 +1,11 @@
+import { useShoppingCart } from "hooks/useShoppingCart";
+import { getUserAddress, isUserLogged } from "lib";
+import { deleteItemFromCart, generateOrder } from "lib/api";
 import Image from "next/image";
+import Router from "next/router";
 import { MdDelete } from "react-icons/md";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { shoppingCartState } from "recoil/atoms";
+import { useRecoilState } from "recoil";
+import { shoppingCartSelector } from "recoil/atoms";
 import { HorizontalBox, VerticalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
 import { LgTextBold, LgTextThin, MdText, MdTextBold, SmText } from "ui/texts";
@@ -15,12 +19,9 @@ import {
   ProductPrice,
   ShoppingCartContainer,
 } from "./styles";
-import { getUserAddress, isUserLogged } from "lib";
-import Router from "next/router";
-import { generateOrder } from "lib/api";
 
 export const ShoppingCart = () => {
-  const shoppingCartItems = useRecoilValue(shoppingCartState);
+  const shoppingCartItems = useShoppingCart();
   let cartIsEmpty = shoppingCartItems.length == 0;
   let totalPrice = shoppingCartItems.reduce(
     (accum, curr) => accum + curr.price,
@@ -83,10 +84,13 @@ const CartInformation = ({ total }: { total: number }) => {
 
 const ShoppingCartItem = ({ product }: { product: shoppingCartItem }) => {
   const [shoppingCartItems, setShoppingCartItems] =
-    useRecoilState(shoppingCartState);
-  const index = shoppingCartItems.findIndex((item) => item === product);
-  const handleDelete = () => {
+    useRecoilState(shoppingCartSelector);
+  const index = shoppingCartItems.findIndex(
+    (item: shoppingCartItem) => item === product
+  );
+  const handleDelete = async () => {
     const newList = removeItemAtIndex(shoppingCartItems, index);
+    await deleteItemFromCart(product.id);
     setShoppingCartItems(newList);
   };
   return (
@@ -100,7 +104,7 @@ const ShoppingCartItem = ({ product }: { product: shoppingCartItem }) => {
       <ProductDetail align="flex-start" gap="10px">
         <LgTextThin>{product.title}</LgTextThin>
         <MdText>Cantidad: 1</MdText>
-        <SmText>talle:42</SmText>
+        <SmText>{product.size}</SmText>
       </ProductDetail>
       <ProductPrice>
         <MdText>Total</MdText>

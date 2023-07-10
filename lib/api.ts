@@ -153,3 +153,33 @@ export async function deleteFavourite(itemId: string) {
     },
   });
 }
+
+export async function getShoppingCart() {
+  return await fetchAPI("/me/shopping-cart", {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+export async function addProductToCart(product: shoppingCartItem) {
+  return await fetchAPI("/me/shopping-cart", {
+    method: "PATCH",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      product,
+    }),
+  });
+}
+export async function deleteItemFromCart(itemId: string) {
+  return await fetchAPI("/me/shopping-cart?productId=" + itemId, {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}

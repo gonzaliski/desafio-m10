@@ -1,3 +1,4 @@
+import { addProductToCart, getShoppingCart } from "lib/api";
 import { atom, selector } from "recoil";
 
 export const shoppingCartState = atom({
@@ -5,9 +6,20 @@ export const shoppingCartState = atom({
   default: [] as shoppingCartItem[],
 });
 
+export const shoppingCartSelector = selector({
+  key: "shoppingCartSelector",
+  get: ({ get }) => {
+    const shoppingCart = get(shoppingCartState);
+    return shoppingCart;
+  },
+  set: ({ set }, newItem) => {
+    set(shoppingCartState, newItem);
+  },
+});
+
 export const favouriteItemsState = atom({
   key: "favouriteItems",
-  default: [],
+  default: [] as favouriteItems[],
 });
 
 export const favouriteItemsStateUpdated = selector({

@@ -9,9 +9,10 @@ import styled from "styled-components";
 import { HorizontalBox, VerticalBox } from "ui/boxes";
 import { LgTextBold, LgTextThin, MdText, SmText } from "ui/texts";
 import { ProductDetail, ProductPrice } from "./shopping-cart/styles";
+import { useFavourites } from "hooks/useFavourite";
 
 export const Favourites = () => {
-  const favourites = useRecoilValue(favouriteItemsStateUpdated);
+  const favourites = useFavourites();
   const setFavourites = useSetRecoilState(favouriteItemsStateUpdated);
   // const favoriteItemsValue = useRecoilValue(favouriteItemsStateUpdated);
   const handleDelete = async (selectedItem: favouriteItems) => {

@@ -38,18 +38,4 @@ export const LongSection = styled.section<LongSectionProps>`
   width: 100vw;
   gap: 20px;
   padding: 40px 0;
-
-  .featured__list-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
-  }
-  @media (min-width: 768px) {
-    .featured__list-container {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-  }
 `;

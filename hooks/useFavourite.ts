@@ -11,6 +11,7 @@ export function useFavourites() {
   useEffect(() => {
     const fetchInitialFavourites = async () => {
       try {
+        //solo si el usuario esta logeado se puede buscar sus favoritos
         if (isUserLogged()) {
           const initialFavourites = await getFavourites();
           console.log(initialFavourites);
@@ -25,5 +26,5 @@ export function useFavourites() {
     fetchInitialFavourites();
   }, []);
 
-  return favouriteItems; // No renderizar nada en este componente
+  return favouriteItems;
 }

@@ -11,8 +11,7 @@ export const LightHeading = styled(DarkHeading)`
   color: white;
 `;
 
-export const Subtitle = styled.h2<{ align: string }>`
-  text-align: ${({ align }) => align || "initial"};
+export const Subtitle = styled.h2`
   color: var(--black-main);
   margin: 0;
 `;

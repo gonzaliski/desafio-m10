@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { shoppingCartState } from "recoil/atoms";
+import { shoppingCartSelector, shoppingCartState } from "recoil/atoms";
 import styled from "styled-components";
 import { HorizontalBox } from "ui/boxes";
 import { MainButton } from "ui/buttons";
@@ -12,39 +12,58 @@ import { MdText, Subtitle, ThinSubtitle } from "ui/texts";
 import { SizeSelector } from "./SizeSelector";
 import { findProductById } from "utils";
 import { Stock } from "./Stock";
+import { useFavourites } from "hooks/useFavourite";
+import { addProductToCart } from "lib/api";
 
 export const ProductCardDetail = ({
   product,
 }: {
   product: ProductCardDetailProps;
 }) => {
+  const favourites = useFavourites();
   const [selectedSize, setSelectedSize] = useState("");
   const [inShoppingCart, setInShoppingCart] = useState(false);
   const shoppingCartItems = useRecoilValue(shoppingCartState);
-  const setNewItem = useSetRecoilState(shoppingCartState);
+  const setNewItem = useSetRecoilState(shoppingCartSelector);
   const handleSizeSelection = (size: string) => {
     setSelectedSize(size);
   };
-  const addToCart = () => {
-    setNewItem((prevItems) => [
-      ...prevItems,
-      {
-        id: product.id,
-        imgUrl: product.images[0],
-        size: selectedSize,
-        title: product.title,
-        price: product.price,
-      },
-    ]);
-    toast.success("Producto agregado al carrito", {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "light",
-    });
+  const addToCart = async () => {
+    const newProduct = {
+      id: product.id,
+      imgUrl: product.images[0],
+      size: selectedSize,
+      title: product.title,
+      price: product.price,
+    };
+    try {
+      await addProductToCart(newProduct);
+      setNewItem([...shoppingCartItems, newProduct]);
+      toast.success("Producto agregado al carrito", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+    } catch (e) {
+      console.error(e);
+      toast.error("Ha ocurrido un problema en el sistema", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+    }
+  };
+  const favouritesIds = favourites.map((f: favouriteItems) => f.id);
+  const isInFavouritesList = (id: string) => {
+    return favouritesIds.includes(id);
   };
   useEffect(() => {
     if (findProductById(shoppingCartItems, product.id)) {
@@ -78,6 +97,7 @@ export const ProductCardDetail = ({
               image: product?.images[0],
               title: product?.title,
               price: product?.price,
+              isAlreadyFavourite: isInFavouritesList(product?.id),
             }}
           />
         </HorizontalBox>

@@ -65,7 +65,7 @@ const CardContainer = styled.div`
   text-align: left;
   gap: 15px;
   padding: 0px 0px 15px 0px;
-  width: 280px;
+  width: 250px;
   height: 100%;
   border-radius: 10px;
   background-color: white;
@@ -77,6 +77,9 @@ const CardContainer = styled.div`
     position: absolute;
     right: 5%;
     top: 5%;
+  }
+  @media (min-width: 900px) {
+    width: 280px;
   }
 `;
 const PriceTitle = styled(MdText)`
