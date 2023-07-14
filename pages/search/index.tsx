@@ -27,13 +27,13 @@ export default function Search() {
   );
 }
 
-const ResultsContainer = styled(VerticalBox)`
+export const ResultsContainer = styled(VerticalBox)`
   align-self: center;
   margin-top: 20px;
   width: min-content;
 `;
 
-const SearchLayout = styled(VerticalBox)`
+export const SearchLayout = styled(VerticalBox)`
   width: 100%;
   gap: 5rem;
   @media (min-width: 800px) {
@@ -46,6 +46,6 @@ const SearchLayout = styled(VerticalBox)`
   }
 `;
 
-const FiltersContainer = styled(VerticalBox)`
+export const FiltersContainer = styled(VerticalBox)`
   flex: 1 1 40;
 `;

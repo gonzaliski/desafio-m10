@@ -28,20 +28,25 @@ export const MainCarousel = ({ images }: { images: Banner[] }) => {
           },
         }}
       >
-        {images?.map((r: any) => (
-          <Image
-            key={r.id}
-            src={(isMdScreen ? r.desktop : r.mobile) || ""}
-            alt={"imagen"}
-            height={imageSize.height}
-            width={imageSize.width}
-            className="slider__img"
-            onClick={() =>
-              Router.push({ pathname: "/search", query: { search: r.query } })
-            }
-            priority
-          ></Image>
-        ))}
+        {images == null
+          ? null
+          : images?.map((r: any) => (
+              <Image
+                key={r.id}
+                src={(isMdScreen ? r.desktop : r.mobile) || ""}
+                alt={"imagen"}
+                height={imageSize.height}
+                width={imageSize.width}
+                className="slider__img"
+                onClick={() =>
+                  Router.push({
+                    pathname: "/search",
+                    query: { search: r.query },
+                  })
+                }
+                priority
+              ></Image>
+            ))}
       </Carousel>
     </CarouselWrapper>
   );

@@ -1,9 +1,18 @@
 export default async function (req: any, res: any) {
-  const response = await fetch(
-    "https://preview.contentful.com/spaces/x1j2peljha18/environments/master/entries?content_type=eCommerceBanner&access_token=8HkLEdrPGMe3gdgJ-RZb60sFyXKtvOWaYCG23w8pNkU"
-  );
-  const data = await response.json();
-  res.json(processData(data));
+  try {
+    const url =
+      "https://preview.contentful.com/spaces/" +
+      process.env.CONTENTFUL_SPACE_ID +
+      "/environments/master/entries?content_type=eCommerceBanner&access_token=" +
+      process.env.CONTENTFUL_ACCESS_TOKEN;
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+
+    res.json(processData(data));
+  } catch (e) {
+    res.json(e);
+  }
 }
 
 function processData(data: any) {

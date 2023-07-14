@@ -39,3 +39,27 @@ export const LongSection = styled.section<LongSectionProps>`
   gap: 20px;
   padding: 40px 0;
 `;
+export const ProductsContainer = styled(HorizontalBox)`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .results-container {
+    gap: 20px;
+    @media (min-width: 768px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  }
+  @media (min-width: 768px) {
+    margin-left: 20px;
+    width: 65%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    justify-content: center;
+    .results-container {
+      justify-content: flex-start;
+    }
+  }
+`;

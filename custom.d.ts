@@ -114,3 +114,5 @@ type Banner = {
   desktop: string;
   mobile: string;
 };
+
+type Genre = "men" | "female";

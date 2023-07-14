@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { LgTextBold } from "ui/texts";
 import { ProductCard } from "./product/ProductCard";
 import { useFavourites } from "hooks/useFavourite";
-import { HorizontalBox, VerticalBox } from "ui/boxes";
+import { HorizontalBox, ProductsContainer, VerticalBox } from "ui/boxes";
 import styled from "styled-components";
 
 export const SearchProducts = ({
@@ -49,28 +49,3 @@ export const SearchProducts = ({
     </ProductsContainer>
   );
 };
-
-const ProductsContainer = styled(HorizontalBox)`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  .results-container {
-    gap: 20px;
-    @media (min-width: 768px) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-  }
-  @media (min-width: 768px) {
-    margin-left: 20px;
-    width: 65%;
-    max-width: 1200px;
-    flex-wrap: wrap;
-    justify-content: center;
-    .results-container {
-      justify-content: center;
-    }
-  }
-`;

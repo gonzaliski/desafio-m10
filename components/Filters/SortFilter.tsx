@@ -61,7 +61,7 @@ const Options = ({
     const updatedQueries = { ...currentQueries, rule: op.value };
 
     Router.push({
-      pathname: "/search",
+      pathname: Router.pathname,
       query: updatedQueries,
     });
   };

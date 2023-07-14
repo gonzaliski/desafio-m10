@@ -21,7 +21,7 @@ export default function Home({
         <MainCarousel images={banners} />
       </VerticalBox>
       <VerticalBox gap="70px">
-        <Subtitle align="center">Buscá tus marcas favoritas</Subtitle>
+        <Subtitle>Buscá tus marcas favoritas</Subtitle>
         <BrandsCarousel brands={brands} />
       </VerticalBox>
       <LongSection color="var(--primary-color)">
@@ -43,6 +43,8 @@ export const getServerSideProps: GetServerSideProps<{
   const brandsRes = await fetch(url + "/api/brands");
   const bannersRes = await fetch(url + "/api/banners");
   const productRes = await fetch(url + "/api/featured-products");
+  console.log(productRes);
+
   const featuredProducts = await productRes.json();
   const brands = await brandsRes.json();
   const banners = await bannersRes.json();

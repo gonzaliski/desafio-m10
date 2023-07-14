@@ -1,8 +1,12 @@
 import { getEmail, retrieveToken, saveEmail, saveToken } from "lib";
 
-// const API_URL = "https://desafio-m9-lovat.vercel.app/api";
-const API_URL = "http://localhost:3001/api";
+const API_URL =
+  process.env.NODE_ENV !== "development"
+    ? process.env.NEXT_PUBLIC_API_URL
+    : "http://localhost:3001/api";
 export async function fetchAPI(param: RequestInfo, option: RequestInit) {
+  console.log(API_URL);
+
   const token = retrieveToken();
   const init: any = option || {};
   if (token) {
@@ -10,7 +14,7 @@ export async function fetchAPI(param: RequestInfo, option: RequestInit) {
     init.headers.Authorization = "Bearer " + token;
     init.headers["Content-type"] = "application/json";
   }
-  const res = await fetch(API_URL + param, init);
+  const res = await fetch((API_URL as string) + param, init);
   if (res.status >= 200 && res.status < 300) {
     const data = await res.json();
     return data;
@@ -182,4 +186,16 @@ export async function deleteItemFromCart(itemId: string) {
       "Content-type": "application/json",
     },
   });
+}
+
+export async function getProductsByGenre(genre: Genre, offset = 20) {
+  return await fetchAPI(
+    "/products/genre?genre=" + genre + "&offset=" + offset,
+    {
+      mode: "cors",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
 }

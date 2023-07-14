@@ -6,14 +6,14 @@ import { MdTextSuperBold } from "ui/texts";
 export const ShortCuts = () => {
   return (
     <ShortCutsContainer>
-      <Link href={"/search?search=hombre"} passHref legacyBehavior>
-        <MdTextSuperBold>Hombre</MdTextSuperBold>
+      <Link href={"/search/hombre"} passHref legacyBehavior>
+        <MdTextSuperBold className="link">Hombre</MdTextSuperBold>
       </Link>
-      <Link href={"/search?search=mujer"} passHref legacyBehavior>
-        <MdTextSuperBold>Mujer</MdTextSuperBold>
+      <Link href={"/search/mujer"} passHref legacyBehavior>
+        <MdTextSuperBold className="link">Mujer</MdTextSuperBold>
       </Link>
       <Link href={"/search?search="} passHref legacyBehavior>
-        <MdTextSuperBold>Todos</MdTextSuperBold>
+        <MdTextSuperBold className="link">Todos</MdTextSuperBold>
       </Link>
     </ShortCutsContainer>
   );
@@ -27,4 +27,7 @@ const ShortCutsContainer = styled(HorizontalBox)`
   padding: 15px;
   border-bottom: 1px solid lightgray;
   border-spacing: 20px;
+  .link {
+    cursor: pointer;
+  }
 `;
