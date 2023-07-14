@@ -1,7 +1,12 @@
 import { getEmail, retrieveToken, saveEmail, saveToken } from "lib";
 
-const API_URL = "https://desafio-m9-lovat.vercel.app/api";
+const API_URL =
+  process.env.NODE_ENV !== "development"
+    ? process.env.NEXT_PUBLIC_API_URL
+    : "http://localhost:3001/api";
 export async function fetchAPI(param: RequestInfo, option: RequestInit) {
+  console.log(API_URL);
+
   const token = retrieveToken();
   const init: any = option || {};
   if (token) {
@@ -9,7 +14,7 @@ export async function fetchAPI(param: RequestInfo, option: RequestInit) {
     init.headers.Authorization = "Bearer " + token;
     init.headers["Content-type"] = "application/json";
   }
-  const res = await fetch(API_URL + param, init);
+  const res = await fetch((API_URL as string) + param, init);
   if (res.status >= 200 && res.status < 300) {
     const data = await res.json();
     return data;
@@ -77,13 +82,12 @@ export async function updateAddress(address: string) {
 }
 
 export async function generateOrder(
-  productId: string,
   address: string,
-  productData: ProductData
+  products: shoppingCartItem[]
 ) {
   console.log(address);
 
-  return await fetchAPI(`/order?productId=${productId}`, {
+  return await fetchAPI(`/order`, {
     method: "POST",
     mode: "cors",
     headers: {
@@ -91,7 +95,7 @@ export async function generateOrder(
     },
     body: JSON.stringify({
       envio: address,
-      productData,
+      products,
     }),
   });
 }
@@ -120,4 +124,78 @@ export async function getProductByID(productId: string) {
       "Content-type": "application/json",
     },
   });
+}
+
+export async function getFavourites() {
+  return await fetchAPI("/me/favourites", {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+
+export async function setNewFavourite(product: favouriteItems) {
+  return await fetchAPI("/me/favourites", {
+    method: "PATCH",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      product,
+    }),
+  });
+}
+
+export async function deleteFavourite(itemId: string) {
+  return await fetchAPI("/me/favourites?productId=" + itemId, {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+
+export async function getShoppingCart() {
+  return await fetchAPI("/me/shopping-cart", {
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+export async function addProductToCart(product: shoppingCartItem) {
+  return await fetchAPI("/me/shopping-cart", {
+    method: "PATCH",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      product,
+    }),
+  });
+}
+export async function deleteItemFromCart(itemId: string) {
+  return await fetchAPI("/me/shopping-cart?productId=" + itemId, {
+    method: "DELETE",
+    mode: "cors",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+
+export async function getProductsByGenre(genre: Genre, offset = 20) {
+  return await fetchAPI(
+    "/products/genre?genre=" + genre + "&offset=" + offset,
+    {
+      mode: "cors",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  );
 }

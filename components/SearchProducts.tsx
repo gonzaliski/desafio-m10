@@ -1,34 +1,51 @@
 import { useProducts } from "lib/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { LargeTextBold } from "ui/texts";
-import { ProductCard } from "./products/ProductCard";
+import { LgTextBold } from "ui/texts";
+import { ProductCard } from "./product/ProductCard";
+import { useFavourites } from "hooks/useFavourite";
+import { HorizontalBox, ProductsContainer, VerticalBox } from "ui/boxes";
+import styled from "styled-components";
 
-export const SearchProducts = (props: any) => {
+export const SearchProducts = ({
+  count,
+}: {
+  count: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const router = useRouter();
-  const products = useProducts(router.query.search as string);
-  console.log(products);
-
+  const { search, offset, rule } = router.query;
+  const products = useProducts(
+    search as string,
+    offset as string,
+    rule as string
+  );
+  const favourites = useFavourites();
+  const favouritesIds = favourites.map((f: favouriteItems) => f.id);
+  const isInFavouritesList = (id: string) => {
+    return favouritesIds.includes(id);
+  };
   useEffect(() => {
-    props.count(products?.results.length);
+    count(products?.results.length);
   }, [products?.results]);
   return (
-    <>
-      {products?.results.length !== 0 ? (
-        products?.results.map((p: any) => (
-          <ProductCard
-            id={p.objectID}
-            title={p.title}
-            desc={p.description}
-            price={p.price}
-            imgUrl={p.images[0]}
-            detail={false}
-            purchasable={false}
-          />
-        ))
-      ) : (
-        <LargeTextBold>No hay resultados</LargeTextBold>
-      )}
-    </>
+    <ProductsContainer>
+      <VerticalBox className="results-container">
+        {products?.results.length !== 0 ? (
+          products?.results.map((p: any) => (
+            <ProductCard
+              key={p.id}
+              id={p.id}
+              title={p.title}
+              price={p.price}
+              imageUrl={p.imageUrl}
+              stock={p.stock}
+              isAlreadyFavourite={isInFavouritesList(p.id)}
+            />
+          ))
+        ) : (
+          <LgTextBold>No hay resultados</LgTextBold>
+        )}
+      </VerticalBox>
+    </ProductsContainer>
   );
 };

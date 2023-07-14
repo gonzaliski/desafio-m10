@@ -1,15 +1,15 @@
 import { Layout } from "components/Layout/Layout";
-import { ProductCardDetail } from "components/products/ProductCardDetail";
+import { ProductCardDetail } from "components/product/ProductCardDetail";
 import { getAllProductIDs, getProductByID } from "lib/api";
 import { GetStaticPropsContext } from "next";
-import { PageSection } from "ui/boxes";
+import { LongSection } from "ui/boxes";
 
-export default function Item({ product }: any) {
+export default function Item({ product }: { product: ProductCardDetailProps }) {
   return (
     <Layout>
-      <PageSection alignCenter>
+      <LongSection>
         <ProductCardDetail product={product} />
-      </PageSection>
+      </LongSection>
     </Layout>
   );
 }
@@ -19,7 +19,6 @@ export async function getStaticPaths() {
   const paths = res.map((item: any) => {
     return { params: { itemId: item.toString() } };
   });
-  console.log("soy los paths", paths);
   return {
     paths: paths,
     fallback: true, // false or 'blocking'
@@ -27,7 +26,6 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  console.log(context?.params);
   const id = context?.params?.itemId;
   const product = await getProductByID(id as string);
   return {

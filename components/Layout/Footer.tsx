@@ -3,44 +3,48 @@ import Link from "next/link";
 import Router from "next/router";
 import styled from "styled-components";
 import { InstagramIcon, TwitterIcon } from "ui/icons";
-import { LargeTextThin, TinyText } from "ui/texts";
+import { LgTextBold, LgTextThin, TinyMdText } from "ui/texts";
 export const Footer = () => {
   const handleLogout = () => {
     logout();
     Router.push("/");
   };
+  let actualYear = new Date().getFullYear();
   return (
     <FooterContainer>
       <FooterContentContainer>
         <ContentBox>
+          <LgTextBold>Atajos</LgTextBold>
           <Link href={"/ingresar"} passHref legacyBehavior>
-            <TinyText>Ingresar</TinyText>
+            <TinyMdText className="link">Ingresar</TinyMdText>
           </Link>
           <Link href={"/perfil"} passHref legacyBehavior>
-            <TinyText>Mi perfil</TinyText>
+            <TinyMdText className="link">Mi perfil</TinyMdText>
           </Link>
           <Link href={"/"} passHref legacyBehavior>
-            <TinyText>Buscar</TinyText>
+            <TinyMdText className="link">Buscar</TinyMdText>
           </Link>
-          <TinyText onClick={handleLogout}>Logout</TinyText>
+          <TinyMdText onClick={handleLogout} className="link">
+            Logout
+          </TinyMdText>
         </ContentBox>
         <ContentBox>
-          <LargeTextThin>Redes</LargeTextThin>
+          <LgTextBold>Redes</LgTextBold>
           <SocialLink>
             <TwitterIcon></TwitterIcon>
             <Link href={"https://www.twitter.com"} passHref legacyBehavior>
-              <TinyText>My Ecommerce</TinyText>
+              <TinyMdText>Gonzalo Méndez Stefano</TinyMdText>
             </Link>
           </SocialLink>
           <SocialLink>
             <InstagramIcon></InstagramIcon>
             <Link href={"https://www.instagram.com"} passHref legacyBehavior>
-              <TinyText>My Ecommerce</TinyText>
+              <TinyMdText>Gonzalo Méndez Stefano</TinyMdText>
             </Link>
           </SocialLink>
         </ContentBox>
+        <TinyMdText>@{actualYear} apx</TinyMdText>
       </FooterContentContainer>
-      <TinyText>©2022 apx</TinyText>
     </FooterContainer>
   );
 };
@@ -61,7 +65,7 @@ const FooterContentContainer = styled.div`
   padding-bottom: 150px;
   @media (min-width: 768px) {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
   }
 `;
 
@@ -69,9 +73,13 @@ const ContentBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  .link {
+    cursor: pointer;
+  }
 `;
 
 const SocialLink = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 5px;

@@ -16,30 +16,56 @@ export const Subtitle = styled.h2`
   margin: 0;
 `;
 
+export const ThinSubtitle = styled(Subtitle)`
+  font-weight: 400;
+`;
+
 export const LightSubtitle = styled(Subtitle)`
   color: white;
 `;
 
-export const LargeTextBold = styled.h3`
-  font-size: 20px;
+export const LgTextBold = styled.h3`
   margin: 0;
+  font-size: 16px;
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
-export const LargeTextThin = styled(LargeTextBold)`
+export const LgTextThin = styled(LgTextBold)`
   font-weight: 400;
 `;
 
-export const BodyText = styled.p`
-  font-size: 16px;
+export const MdText = styled.p`
+  font-size: 12px;
   margin: 0;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
-export const BodyTextBold = styled(BodyText)`
+export const MdTextBold = styled(MdText)`
   font-weight: 600;
 `;
 
-export const TinyText = styled(BodyText)`
+export const MdTextSuperBold = styled(MdTextBold)`
+  font-weight: 800;
+`;
+
+export const TinyMdText = styled(MdText)`
   font-weight: 300;
+`;
+export const SmText = styled(MdText)`
+  font-size: 14px;
+`;
+export const TinySmText = styled(SmText)`
+  font-weight: 300;
+`;
+export const XSmText = styled(SmText)`
+  font-size: 12px;
+`;
+export const XSmTextBold = styled(XSmText)`
+  font-weight: 600;
 `;
 
 export const Label = styled.label`

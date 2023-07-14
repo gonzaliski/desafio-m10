@@ -1,4 +1,4 @@
-import { SignInForm } from "components/Forms";
+import { SignInForm } from "components/forms/LoginForm";
 import { Layout } from "components/Layout/Layout";
 import { PageSection } from "ui/boxes";
 

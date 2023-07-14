@@ -1,8 +1,14 @@
 export default async function (req: any, res: any) {
+  const url = "https://desafio-m9-lovat.vercel.app/api";
   const response = await fetch(
-    "https://desafio-m9-lovat.vercel.app/api/search?search=chair&limit=20&offset=20"
+    "https://desafio-m9-lovat.vercel.app/api/products/featured",
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
   );
   const data = await response.json();
-  const products = data.results.slice(0, 3);
+  const products = data.results;
   res.json(products);
 }

@@ -1,19 +1,28 @@
+type alignProps = "center" | "flex-end" | "flex-start" | "stretch" | "baseline";
+type justifyProps =
+  | "center"
+  | "flex-end"
+  | "flex-start"
+  | "space-around"
+  | "space-between"
+  | "space-evenly";
 type textProps = {
   text: string;
 };
 type PageSectionProps = {
-  sm?: sm;
+  gap?: string;
+  sm?: boolean;
   width?: string;
-  alignCenter?: alignCenter;
+  align?: alignProps;
+  justify?: justifyProps;
 };
 type ProductCardProps = {
   id: string;
   title: string;
-  desc: string;
   price: number;
-  imgUrl?: string;
-  purchasable?: boolean;
-  detail?: boolean;
+  imageUrl: string;
+  stock: boolean;
+  isAlreadyFavourite: boolean;
 };
 type NavBarLinksProps = {
   active?: boolean;
@@ -22,21 +31,14 @@ type NavBarLinksProps = {
 type BurgerMenuContainerProps = {
   open?: boolean;
 };
-
-type VerticalBoxProps = {
+type FlexProps = {
   gap?: string;
-  width?: string;
-  align?:
-    | "center"
-    | "flex-end"
-    | "flex-start"
-    | "space-around"
-    | "space-between"
-    | "space-evenly";
+  align?: alignProps;
+  justify?: justifyProps;
 };
 
-type HorizontalBoxProps = {
-  gap?: string;
+type VerticalBoxProps = FlexProps & {
+  width?: string;
 };
 
 type HeadingProps = {
@@ -53,7 +55,7 @@ type UserStorageData = {
   address: string;
 };
 
-type ProductsSectionProps = {
+type LongSectionProps = {
   color?: string;
 };
 
@@ -63,6 +65,12 @@ type MainButtonProps = {
 
 type ProductCardDetailProps = {
   id: string;
+  title: string;
+  description: string;
+  price: number;
+  sizesAvailable: string[];
+  images: string[];
+  stock: boolean;
 };
 
 type SessionInfoProps = {
@@ -70,8 +78,41 @@ type SessionInfoProps = {
 };
 
 type ProductData = {
+  id: string;
   title: string;
-  desc: string;
   price: number;
-  imgUrl?: string;
+  imageUrl: string;
+  stock: boolean;
 };
+
+type SizeSelectorProps = {
+  onChange?: (a: string) => void;
+  available: string[];
+};
+type shoppingCartItem = {
+  id: string;
+  imgUrl: string;
+  size: string;
+  title: string;
+  price: number;
+};
+type favouriteItems = {
+  id: string;
+  image: string;
+  title: string;
+  price: number;
+  isAlreadyFavourite: boolean;
+};
+
+type Brand = {
+  name: string;
+  image: string;
+};
+type Banner = {
+  id: string;
+  query: string;
+  desktop: string;
+  mobile: string;
+};
+
+type Genre = "men" | "female";
