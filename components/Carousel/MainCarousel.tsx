@@ -15,7 +15,6 @@ export const MainCarousel = ({ images }: { images: Banner[] }) => {
       <Carousel
         className={"carousel"}
         wrapAround={true}
-        adaptiveHeight={true}
         // withoutControls={true}
         autoplay={true}
         autoplayInterval={5000}
@@ -56,19 +55,16 @@ const CarouselWrapper = styled.div`
   display: flex;
   place-content: center;
   width: 100%;
-  height: auto;
+  margin-bottom: 80px;
+  height: 100%;
+  max-height: 540px;
   .slider__img {
     cursor: pointer;
-    object-fit: scale-down;
-    object-position: top;
-    margin-bottom: 35px;
     width: 100%;
     height: 100%;
   }
-  @media (min-width: 350px) {
-    .slider__img {
-      object-fit: cover;
-    }
+  .slider-frame .carousel {
+    height: 540px;
   }
 
   .carousel {
@@ -90,6 +86,11 @@ const CarouselWrapper = styled.div`
   .paging-item.active {
     button {
       transform: scale(1.6);
+    }
+  }
+  .slider-control-bottomcenter {
+    ul {
+      top: 50px !important;
     }
   }
 `;
