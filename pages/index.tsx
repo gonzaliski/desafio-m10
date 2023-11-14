@@ -17,9 +17,7 @@ export default function Home({
 }) {
   return (
     <Layout>
-      <VerticalBox>
-        <MainCarousel images={banners} />
-      </VerticalBox>
+      <MainCarousel images={banners} />
       <VerticalBox gap="70px">
         <Subtitle>Buscá tus marcas favoritas</Subtitle>
         <BrandsCarousel brands={brands} />
